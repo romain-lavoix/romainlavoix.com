@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import MenuLink from '../components/MenuLink'
-import Link from 'next/Link'
+import Link from 'next/link'
 import Image from 'next/image'
 
 const Home: NextPage = () => {
