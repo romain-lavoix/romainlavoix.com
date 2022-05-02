@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { LoremIpsum } from 'lorem-ipsum'
 import MenuLink from '../components/MenuLink'
 import Link from 'next/Link'
 import Image from 'next/image'
@@ -9,16 +8,7 @@ const Home: NextPage = () => {
   const title = 'Romain Lavoix'
   const description =
     'Full Stack Engineer and Product Owner turned Front-End Engineer'
-  const lorem = new LoremIpsum({
-    sentencesPerParagraph: {
-      max: 8,
-      min: 4,
-    },
-    wordsPerSentence: {
-      max: 16,
-      min: 4,
-    },
-  })
+
   return (
     <>
       <Head>

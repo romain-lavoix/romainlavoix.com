@@ -1,6 +1,5 @@
 import { HomeIcon } from '@heroicons/react/solid'
-import { AppProps } from 'next/app'
-import Link from 'next/link'
+import Link from 'next/Link'
 
 type Props = {
   title: String
