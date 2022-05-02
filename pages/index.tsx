@@ -139,12 +139,12 @@ const Home: NextPage = () => {
                 <p className="text-gray-500">View</p>
               </div>
             </div>
-            <div className="grid grid-cols-12 gap-4 pb-32">
+            <div className="grid grid-cols-12 gap-4 pb-16">
               <div className="col-span-1">
                 <p className="text-gray-400">Where</p>
               </div>
-              <div className="col-span-10 flex items-center gap-4">
-                <div className="relative float-left h-[300px] w-full">
+              <div className="col-span-10  items-center gap-4">
+                <div className="relative mb-2 h-[300px] w-full">
                   <Image
                     src="/map.png"
                     objectFit="cover"
@@ -152,7 +152,33 @@ const Home: NextPage = () => {
                     layout="fill"
                   />
                 </div>
+                <div className="grid justify-items-end">
+                  <div className="flex items-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      className="text-gray-400"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <p className="text-gray-400">Noumea, New Caledonia</p>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div className="grid grid-cols-12 gap-4 pb-32">
+              <div className="col-span-1">
+                <p className="text-gray-400">Work</p>
+              </div>
+              <div className="col-span-10 flex items-center gap-4">xxxx</div>
             </div>
           </div>
         </div>
