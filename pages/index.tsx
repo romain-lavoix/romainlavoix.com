@@ -32,9 +32,9 @@ const Home: NextPage = () => {
         <meta property="og:description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="h-screen w-full lg:flex">
+      <div className="relative h-full w-full lg:flex">
         <nav
-          className="flex:none fixed top-0 left-0 z-10 hidden h-full w-56 border-r-[1px] bg-gray-50 p-4 lg:block"
+          className="flex:none fixed hidden h-full w-56 border-r-[1px] bg-gray-50 p-4 lg:block"
           aria-label="Sidebar"
         >
           <h1 className="pl-2 pb-6 text-sm font-bold antialiased">
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
           </h1>
           <MenuLink title={'Home'} />
         </nav>
-        <div className="mb-32 flex h-screen w-full justify-center p-4 pt-32 antialiased">
+        <div className="ml-56 flex w-full justify-center pt-32 antialiased">
           <div>
             <div className="grid grid-cols-12 gap-4 pb-16">
               <div className="col-span-10 col-start-2">
@@ -51,6 +51,8 @@ const Home: NextPage = () => {
                     src="/rom_grey.jpg"
                     alt="picture of author"
                     layout="fill"
+                    height={360}
+                    width={360}
                     objectFit="cover"
                     className="rounded"
                   ></Image>
@@ -97,7 +99,7 @@ const Home: NextPage = () => {
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-12 gap-4 pb-16">
               <div className="col-span-1">
                 <p className="text-gray-400">Online</p>
               </div>
@@ -135,6 +137,21 @@ const Home: NextPage = () => {
                 </Link>
                 <div className="w-full border-t-[1px] border-dashed border-gray-300"></div>
                 <p className="text-gray-500">View</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-4 pb-32">
+              <div className="col-span-1">
+                <p className="text-gray-400">Where</p>
+              </div>
+              <div className="col-span-10 flex items-center gap-4">
+                <div className="relative float-left h-[300px] w-full">
+                  <Image
+                    src="/map.png"
+                    objectFit="cover"
+                    className="rounded-3xl"
+                    layout="fill"
+                  />
+                </div>
               </div>
             </div>
           </div>
