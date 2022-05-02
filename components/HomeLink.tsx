@@ -13,7 +13,7 @@ const HomeLink = ({ title, link, subtitle, subtitle2 }: Props) => {
     <div className="col-span-10 col-start-2 flex items-center gap-4">
       <div className="shrink-0">
         <Link href={link}>
-          <a className="w-full font-bold">{title}</a>
+          <a className="w-full font-medium">{title}</a>
         </Link>
       </div>
       <div className="w-full grow border-t-[1px] border-dashed border-gray-300"></div>

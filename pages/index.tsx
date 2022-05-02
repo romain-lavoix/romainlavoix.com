@@ -33,22 +33,21 @@ const Home: NextPage = () => {
           </h1>
           <MenuLink title={'Home'} />
         </nav>
-        <div className="flex w-full justify-center pt-32 antialiased lg:ml-56">
+        <div className="flex w-full justify-center px-4 pt-32 antialiased lg:ml-56">
           <div>
-            <div className="grid grid-cols-12 gap-4 pb-16">
+            <div className="pb-16">
               <div className="col-span-10 col-start-2">
                 <div className="relative float-left mr-2 h-[120px] w-[120px] rounded border">
                   <Image
                     src="/rom_grey.jpg"
                     alt="picture of author"
                     layout="fill"
-                    height={360}
-                    width={360}
                     objectFit="cover"
                     className="rounded"
+                    priority
                   ></Image>
                 </div>
-                <article className="prose prose-sm prose-slate lg:prose-base">
+                <article className="prose prose-slate">
                   <p>
                     Hi, I'm Romain. I'm a software engineer and product owner,
                     experienced in working across the whole stack, and in
@@ -90,7 +89,7 @@ const Home: NextPage = () => {
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-12 gap-4 pb-16">
+            <div className="grid grid-cols-12 gap-4 pb-16 ">
               <div className="col-span-1">
                 <p className="text-gray-400">Online</p>
               </div>
@@ -146,9 +145,9 @@ const Home: NextPage = () => {
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       className="text-gray-400"
                     >
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
