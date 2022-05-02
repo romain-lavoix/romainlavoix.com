@@ -3,6 +3,7 @@ import Head from 'next/head'
 import MenuLink from '../components/MenuLink'
 import Link from 'next/link'
 import Image from 'next/image'
+import HomeLink from '../components/HomeLink'
 
 const Home: NextPage = () => {
   const title = 'Romain Lavoix'
@@ -32,7 +33,7 @@ const Home: NextPage = () => {
           </h1>
           <MenuLink title={'Home'} />
         </nav>
-        <div className="ml-56 flex w-full justify-center pt-32 antialiased">
+        <div className="flex w-full justify-center pt-32 antialiased lg:ml-56">
           <div>
             <div className="grid grid-cols-12 gap-4 pb-16">
               <div className="col-span-10 col-start-2">
@@ -93,41 +94,35 @@ const Home: NextPage = () => {
               <div className="col-span-1">
                 <p className="text-gray-400">Online</p>
               </div>
-              <div className="col-span-10 flex items-center gap-4">
-                <Link href={'/'}>
-                  <a className="font-bold">Twitter</a>
-                </Link>
-                <div className="w-full border-t-[1px] border-dashed border-gray-300"></div>
-                <p className="text-gray-500">Follow</p>
-              </div>
-              <div className="col-span-10 col-start-2 flex items-center gap-4">
-                <Link href={'/'}>
-                  <a className="font-bold">Polywork</a>
-                </Link>
-                <div className="w-full border-t-[1px] border-dashed border-gray-300"></div>
-                <p className="text-gray-500">Follow</p>
-              </div>
-              <div className="col-span-10 col-start-2 flex items-center gap-4">
-                <Link href={'/'}>
-                  <a className="font-bold">Github</a>
-                </Link>
-                <div className="w-full border-t-[1px] border-dashed border-gray-300"></div>
-                <p className="text-gray-500">View</p>
-              </div>
-              <div className="col-span-10 col-start-2 flex items-center gap-4">
-                <Link href={'/'}>
-                  <a className="font-bold">Overflow</a>
-                </Link>
-                <div className="w-full border-t-[1px] border-dashed border-gray-300"></div>
-                <p className="text-gray-500">View</p>
-              </div>
-              <div className="col-span-10 col-start-2 flex items-center gap-4">
-                <Link href={'/'}>
-                  <a className="font-bold">LinkedIn</a>
-                </Link>
-                <div className="w-full border-t-[1px] border-dashed border-gray-300"></div>
-                <p className="text-gray-500">View</p>
-              </div>
+              <HomeLink
+                title={'Twitter'}
+                link={new URL('https://twitter.com/romain_lavoix')}
+                subtitle={'Subscribe'}
+              />
+              <HomeLink
+                title={'Polywork'}
+                link={new URL('https://www.polywork.com/romainlavoix')}
+                subtitle={'Follow'}
+              />
+              <HomeLink
+                title={'Github'}
+                link={new URL('https://github.com/romain-lavoix')}
+                subtitle={'View'}
+              />
+              <HomeLink
+                title={'Overflow'}
+                link={
+                  new URL(
+                    'https://stackoverflow.com/users/2617419/romain-lavoix'
+                  )
+                }
+                subtitle={'View'}
+              />
+              <HomeLink
+                title={'LinkedIn'}
+                link={new URL('https://www.linkedin.com/in/romain-lavoix/')}
+                subtitle={'View'}
+              />
             </div>
             <div className="grid grid-cols-12 gap-4 pb-16">
               <div className="col-span-1">
@@ -168,23 +163,48 @@ const Home: NextPage = () => {
               <div className="col-span-1">
                 <p className="text-gray-400">Work</p>
               </div>
-              <div className="col-span-10 flex items-center gap-4">xxxx</div>
+              <HomeLink
+                title={'TealForge'}
+                link={new URL('https://tealforge.com/')}
+                subtitle={'Associate | Software Engineer'}
+                subtitle2={'2019-2020'}
+              />
+              <HomeLink
+                title={'ClacTaCom'}
+                link={new URL('https://tealforge.com/')}
+                subtitle={'CTO'}
+                subtitle2={'2017-2019'}
+              />
+              <HomeLink
+                title={'Octo Technology Australia'}
+                link={new URL('https://tealforge.com/')}
+                subtitle={'Software Engineer'}
+                subtitle2={'2016'}
+              />
+              <HomeLink
+                title={'CAFAT'}
+                link={new URL('https://cafet.nc/')}
+                subtitle={'Technical Architect'}
+                subtitle2={'2015'}
+              />
+              <HomeLink
+                title={'Calypso Technology'}
+                link={new URL('https://calypso.com/')}
+                subtitle={'Software Engineer'}
+                subtitle2={'2010-2014'}
+              />
+              <HomeLink
+                title={'Siemens Bangalore'}
+                link={new URL('https://siemens.com/')}
+                subtitle={'Software Engineer Intern'}
+                subtitle2={'2007'}
+              />
             </div>
           </div>
         </div>
       </div>
     </>
   )
-}
-
-// @ts-ignore
-export async function getServerSideProps({ req, res }) {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
-
-  return {}
 }
 
 export default Home
