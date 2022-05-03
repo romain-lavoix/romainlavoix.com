@@ -34,9 +34,9 @@ const Home: NextPage = () => {
           <MenuLink title={'Home'} />
         </nav>
         <div className="flex w-full justify-center px-4 pt-32 antialiased lg:ml-56">
-          <div>
-            <div className="pb-16">
-              <div className="col-span-10 col-start-2">
+          <div className="max-w-prose">
+            <div className="grid grid-cols-12 pb-16">
+              <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
                 <div className="relative float-left mr-2 h-[120px] w-[120px] rounded border">
                   <Image
                     src="/rom_grey.jpg"
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
                     priority
                   ></Image>
                 </div>
-                <article className="prose prose-slate">
+                <article className="prose prose-slate text-justify">
                   <p>
                     Hi, I'm Romain. I'm a software engineer and product owner,
                     experienced in working across the whole stack, and in
@@ -89,83 +89,14 @@ const Home: NextPage = () => {
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-12 gap-4 pb-16 ">
-              <div className="col-span-1">
-                <p className="text-gray-400">Online</p>
-              </div>
-              <HomeLink
-                title={'Twitter'}
-                link={new URL('https://twitter.com/romain_lavoix')}
-                subtitle={'Subscribe'}
-              />
-              <HomeLink
-                title={'Polywork'}
-                link={new URL('https://www.polywork.com/romainlavoix')}
-                subtitle={'Follow'}
-              />
-              <HomeLink
-                title={'Github'}
-                link={new URL('https://github.com/romain-lavoix')}
-                subtitle={'View'}
-              />
-              <HomeLink
-                title={'Overflow'}
-                link={
-                  new URL(
-                    'https://stackoverflow.com/users/2617419/romain-lavoix'
-                  )
-                }
-                subtitle={'View'}
-              />
-              <HomeLink
-                title={'LinkedIn'}
-                link={new URL('https://www.linkedin.com/in/romain-lavoix/')}
-                subtitle={'View'}
-              />
-            </div>
             <div className="grid grid-cols-12 gap-4 pb-16">
-              <div className="col-span-1">
-                <p className="text-gray-400">Where</p>
-              </div>
-              <div className="col-span-10  items-center gap-4">
-                <div className="relative mb-2 h-[300px] w-full">
-                  <Image
-                    src="/map.png"
-                    objectFit="cover"
-                    className="rounded-3xl"
-                    layout="fill"
-                  />
-                </div>
-                <div className="grid justify-items-end">
-                  <div className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-gray-400"
-                    >
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <p className="text-gray-400">Noumea, New Caledonia</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-12 gap-4 pb-32">
               <div className="col-span-1">
                 <p className="text-gray-400">Work</p>
               </div>
               <HomeLink
                 title={'TealForge'}
                 link={new URL('https://tealforge.com/')}
-                subtitle={'Associate | Software Engineer'}
+                subtitle={'Associate'}
                 subtitle2={'2019-2020'}
               />
               <HomeLink
@@ -199,6 +130,78 @@ const Home: NextPage = () => {
                 subtitle2={'2007'}
               />
             </div>
+            <div className="grid grid-cols-12 gap-4 pb-16">
+              <div className="col-span-1">
+                <p className="text-gray-400">Location</p>
+              </div>
+              <div className="col-span-10  items-center gap-4">
+                <div className="relative mb-2 h-[300px] w-full">
+                  <Image
+                    src="/map.png"
+                    objectFit="cover"
+                    className="rounded-3xl"
+                    layout="fill"
+                  />
+                </div>
+                <div className="grid justify-items-end">
+                  <div className="flex items-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-gray-400"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <p className="text-gray-400">Noumea, New Caledonia</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-12 gap-4 pb-16 ">
+              <div className="col-span-12 lg:col-span-1">
+                <p className="font-bold sm:text-lg lg:text-base lg:font-normal lg:text-gray-400">
+                  Online
+                </p>
+              </div>
+              <HomeLink
+                title={'Twitter'}
+                link={new URL('https://twitter.com/romain_lavoix')}
+                subtitle={'Subscribe'}
+              />
+              <HomeLink
+                title={'Polywork'}
+                link={new URL('https://www.polywork.com/romainlavoix')}
+                subtitle={'Follow'}
+              />
+              <HomeLink
+                title={'Github'}
+                link={new URL('https://github.com/romain-lavoix')}
+                subtitle={'View'}
+              />
+              <HomeLink
+                title={'Overflow'}
+                link={
+                  new URL(
+                    'https://stackoverflow.com/users/2617419/romain-lavoix'
+                  )
+                }
+                subtitle={'View'}
+              />
+              <HomeLink
+                title={'LinkedIn'}
+                link={new URL('https://www.linkedin.com/in/romain-lavoix/')}
+                subtitle={'View'}
+              />
+            </div>
+            <div className="pb-16"></div>
           </div>
         </div>
       </div>

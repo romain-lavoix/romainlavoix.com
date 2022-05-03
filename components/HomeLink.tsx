@@ -10,7 +10,7 @@ type Props = {
 
 const HomeLink = ({ title, link, subtitle, subtitle2 }: Props) => {
   return (
-    <div className="col-span-10 col-start-2 flex items-center gap-4">
+    <div className="col-span-12 col-start-1 flex items-center gap-4 lg:col-span-10 lg:col-start-2">
       <div className="shrink-0">
         <Link href={link}>
           <a className="w-full font-medium">{title}</a>
