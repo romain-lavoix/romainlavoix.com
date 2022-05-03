@@ -20,9 +20,11 @@ const HomeLink = ({ title, link, subtitle, subtitle2 }: Props) => {
       <div className="shrink-0">
         <p className="w-full text-gray-500">{subtitle}</p>
       </div>
-      <div className="shrink-0">
-        <p className="w-full text-gray-400">{subtitle2}</p>
-      </div>
+      {subtitle2 ? (
+        <div className="shrink-0">
+          <p className="w-full text-gray-400">{subtitle2}</p>
+        </div>
+      ) : null}
     </div>
   )
 }

@@ -4,6 +4,7 @@ import MenuLink from '../components/MenuLink'
 import Link from 'next/link'
 import Image from 'next/image'
 import HomeLink from '../components/HomeLink'
+import HomeLinkTitle from '../components/HomeLinkTitle'
 
 const Home: NextPage = () => {
   const title = 'Romain Lavoix'
@@ -34,7 +35,7 @@ const Home: NextPage = () => {
           <MenuLink title={'Home'} />
         </nav>
         <div className="flex w-full justify-center px-4 pt-32 antialiased lg:ml-56">
-          <div className="max-w-prose">
+          <div className="max-w-[75ch]">
             <div className="grid grid-cols-12 pb-16">
               <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
                 <div className="relative float-left mr-2 h-[120px] w-[120px] rounded border">
@@ -90,9 +91,7 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="grid grid-cols-12 gap-4 pb-16">
-              <div className="col-span-1">
-                <p className="text-gray-400">Work</p>
-              </div>
+              <HomeLinkTitle title={'Work'} />
               <HomeLink
                 title={'TealForge'}
                 link={new URL('https://tealforge.com/')}
@@ -131,10 +130,8 @@ const Home: NextPage = () => {
               />
             </div>
             <div className="grid grid-cols-12 gap-4 pb-16">
-              <div className="col-span-1">
-                <p className="text-gray-400">Location</p>
-              </div>
-              <div className="col-span-10  items-center gap-4">
+              <HomeLinkTitle title={'Where'} />
+              <div className="col-span-12 items-center gap-4 lg:col-span-10 lg:col-start-2">
                 <div className="relative mb-2 h-[300px] w-full">
                   <Image
                     src="/map.png"
@@ -166,11 +163,7 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="grid grid-cols-12 gap-4 pb-16 ">
-              <div className="col-span-12 lg:col-span-1">
-                <p className="font-bold sm:text-lg lg:text-base lg:font-normal lg:text-gray-400">
-                  Online
-                </p>
-              </div>
+              <HomeLinkTitle title={'Online'} />
               <HomeLink
                 title={'Twitter'}
                 link={new URL('https://twitter.com/romain_lavoix')}
