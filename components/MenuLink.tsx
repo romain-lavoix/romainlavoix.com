@@ -1,35 +1,74 @@
 import { HomeIcon, DesktopComputerIcon } from '@heroicons/react/solid'
+import {
+  HomeIcon as HomeIconOutline,
+  DesktopComputerIcon as DesktopComputerIconOutline,
+} from '@heroicons/react/outline'
 import Link from 'next/link'
 
 type Props = {
-  title: String
-  icon: String
+  title: string
+  icon: string
+  route: string
+  selectedRoute: any
+  setSelectedRoute: any
 }
+import cls from '../utils/cls'
 
-const MenuLink = ({ title, icon }: Props) => {
-  let ComponentIcon = null
+const MenuLink = ({
+  title,
+  icon,
+  route = '/',
+  selectedRoute,
+  setSelectedRoute,
+}: Props) => {
+  const activated = route === selectedRoute
 
-  function renderSwitch(icon: String) {
+  function renderSwitch(icon: String, activated: boolean) {
     switch (icon) {
       case 'Home':
-        return <HomeIcon className="w-4 text-white" />
+        return (
+          <HomeIcon
+            className={cls([
+              'w-4 text-white',
+              activated ? 'text-white' : 'text-black',
+            ])}
+          />
+        )
       case 'DesktopComputer':
-        return <DesktopComputerIcon className="w-4 text-white" />
+        return (
+          <DesktopComputerIcon
+            className={cls([
+              'w-4 text-white',
+              activated ? 'text-white' : 'text-black',
+            ])}
+          />
+        )
       default:
         return null
     }
   }
 
   return (
-    <Link href="/">
-      <span className="mb-1 flex  h-8 items-center justify-center rounded bg-black">
+    <Link href={route}>
+      <a
+        className={cls([
+          'mb-1 flex  h-8 items-center justify-center rounded',
+          activated && 'bg-black',
+        ])}
+        onClick={() => setSelectedRoute(route)}
+      >
         <span className="flex w-full p-2">
-          {renderSwitch(icon)}
-          <button className=" ml-3 text-left text-sm text-white antialiased">
+          {renderSwitch(icon, activated)}
+          <span
+            className={cls([
+              ' ml-3 text-left text-sm antialiased',
+              activated ? 'text-white' : 'text-black',
+            ])}
+          >
             {title}
-          </button>
+          </span>
         </span>
-      </span>
+      </a>
     </Link>
   )
 }
