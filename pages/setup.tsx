@@ -8,7 +8,12 @@ type NextPageWithLayout = NextPage & {
 }
 
 const Setup: NextPageWithLayout = () => {
-  return <>SETUP</>
+  return (
+    <div className={'prose'}>
+      <h2>SETUP</h2>
+      <p>setup</p>
+    </div>
+  )
 }
 
 export default Setup

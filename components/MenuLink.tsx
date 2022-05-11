@@ -53,7 +53,7 @@ const MenuLink = ({
       <a
         className={cls([
           'mb-1 flex  h-8 items-center justify-center rounded',
-          activated && 'bg-black',
+          activated ? 'bg-black' : 'hover:bg-gray-200',
         ])}
         onClick={() => setSelectedRoute(route)}
       >

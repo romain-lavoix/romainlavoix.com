@@ -1,4 +1,4 @@
-const cls = (input: [string, boolean | string]) =>
+const cls = (input) =>
   input
     .filter((cond) => typeof cond === 'string')
     .join(' ')
