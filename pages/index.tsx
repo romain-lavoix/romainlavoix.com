@@ -9,6 +9,7 @@ import { Menu } from '@headlessui/react'
 import Layout from '../components/Layout'
 import Sidebar from '../components/SideBar'
 import { ReactElement, ReactNode } from 'react'
+import { GraphQLClient, gql } from 'graphql-request'
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -232,6 +233,33 @@ const Home: NextPageWithLayout = () => {
 
 export default Home
 
+export async function getStaticProps() {
+  const graphcms = new GraphQLClient(process.env.GRAPHCMS_PROJECT_API || '', {
+    headers: {
+      Authorization: `Bearer ${process.env.GRAPHCMS_PROD_AUTH_TOKEN}`,
+    },
+  })
+
+  const { posts } = await graphcms.request(gql`
+    {
+      posts {
+        id
+        title
+        slug
+        description
+        date
+        content {
+          html
+        }
+      }
+    }
+  `)
+
+  return {
+    props: { posts },
+  }
+}
+
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>
+  return <Layout posts={page.props.posts}>{page}</Layout>
 }

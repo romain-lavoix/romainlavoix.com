@@ -4,8 +4,13 @@ import { MailIcon, XIcon } from '@heroicons/react/solid'
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
 import cls from '../utils/cls'
+import BlogLink from './BlogLink'
 
-export default function Sidebar() {
+type SidebarProps = {
+  posts: any[]
+}
+
+export default function Sidebar({ posts }: SidebarProps) {
   const [selectedRoute, setSelectedRoute] = useState('/')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   console.log(sidebarOpen)
@@ -13,8 +18,7 @@ export default function Sidebar() {
     <>
       <nav
         className={cls([
-          'fixed z-10 h-full w-56 border-r-[1px] bg-gray-50 p-4 transition ease-in-out lg:block',
-          // !sidebarOpen && '-translate-x-96 transform-gpu',
+          'fixed z-10 h-full w-96 border-r-[1px] bg-gray-50 p-4 transition ease-in-out lg:block',
         ])}
         aria-label="Sidebar"
       >
@@ -32,13 +36,19 @@ export default function Sidebar() {
           selectedRoute={selectedRoute}
           setSelectedRoute={setSelectedRoute}
         />
-        <MenuLink
-          title="Setup"
-          icon="DesktopComputer"
-          route={'/setup'}
-          selectedRoute={selectedRoute}
-          setSelectedRoute={setSelectedRoute}
-        />
+        <div className="flex items-center gap-4 pl-2 pt-4">
+          <p className="text-sm font-medium text-gray-500 antialiased">
+            Writing
+          </p>
+        </div>
+        {posts.map((post) => (
+          <BlogLink
+            title={post.title}
+            route={`/${post.slug}`}
+            selectedRoute={selectedRoute}
+            setSelectedRoute={setSelectedRoute}
+          />
+        ))}
       </nav>
       <MenuIcon
         className="m-4 h-10 w-10 rounded p-2 hover:bg-gray-200 lg:hidden"
