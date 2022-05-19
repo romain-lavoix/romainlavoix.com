@@ -4,6 +4,7 @@ import { ReactElement } from 'react'
 type LayoutProps = {
   children: ReactElement
   posts: any[]
+  slug?: string
 }
 
 export default function Layout({ children }: LayoutProps) {

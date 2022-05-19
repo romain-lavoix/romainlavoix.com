@@ -43,8 +43,9 @@ export default function Sidebar({ posts }: SidebarProps) {
         </div>
         {posts.map((post) => (
           <BlogLink
+            key={post.slug}
             title={post.title}
-            route={`/${post.slug}`}
+            route={`/posts/${post.slug}`}
             selectedRoute={selectedRoute}
             setSelectedRoute={setSelectedRoute}
           />

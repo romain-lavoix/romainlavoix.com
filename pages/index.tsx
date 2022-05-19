@@ -231,8 +231,6 @@ const Home: NextPageWithLayout = () => {
   )
 }
 
-export default Home
-
 export async function getStaticProps() {
   const graphcms = new GraphQLClient(process.env.GRAPHCMS_PROJECT_API || '', {
     headers: {
@@ -260,6 +258,17 @@ export async function getStaticProps() {
   }
 }
 
+// export async function getStaticPaths() {
+//   return {
+//     paths: [
+//       { params: { ... } }
+//     ],
+//     fallback: true // false or 'blocking'
+//   };
+// }
+
 Home.getLayout = function getLayout(page: ReactElement) {
   return <Layout posts={page.props.posts}>{page}</Layout>
 }
+
+export default Home
