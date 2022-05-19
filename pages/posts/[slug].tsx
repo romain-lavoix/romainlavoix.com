@@ -11,8 +11,9 @@ type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
-const Post: NextPageWithLayout = (post) => {
+const Post: NextPageWithLayout = ({ posts, slug }) => {
   const router = useRouter()
+  const post = posts.filter((p: { slug: any }) => p.slug === slug)[0]
 
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -33,7 +34,10 @@ const Post: NextPageWithLayout = (post) => {
       </Head>
       <div className="grid grid-cols-12 pb-16">
         <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
-          <article className="prose prose-gray text-justify prose-a:text-blue-600"></article>
+          <article
+            className="prose prose-gray text-justify prose-a:text-blue-600"
+            dangerouslySetInnerHTML={{ __html: post.content?.html }}
+          ></article>
         </div>
       </div>
     </>
