@@ -5,13 +5,16 @@ import { Dialog, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
 import cls from '../utils/cls'
 import BlogLink from './BlogLink'
+import { useRouter } from 'next/router'
 
 type SidebarProps = {
   posts: any[]
 }
 
 export default function Sidebar({ posts }: SidebarProps) {
-  const [selectedRoute, setSelectedRoute] = useState('/')
+  const router = useRouter()
+
+  const [selectedRoute, setSelectedRoute] = useState(router.asPath ?? '/')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   console.log(sidebarOpen)
   return (

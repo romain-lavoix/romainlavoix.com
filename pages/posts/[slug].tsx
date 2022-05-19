@@ -50,7 +50,6 @@ export async function getStaticPaths() {
   const { posts } = await graphcms.request(gql`
     {
       posts {
-        id
         slug
       }
     }
