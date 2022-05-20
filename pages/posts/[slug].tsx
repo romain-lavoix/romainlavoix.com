@@ -8,18 +8,29 @@ import ErrorPage from 'next/error'
 import { gql, GraphQLClient } from 'graphql-request'
 
 type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode
+  posts: any[]
+  slug: string
 }
 
-const Post: NextPageWithLayout = ({ posts, slug }) => {
+type PostParams = {
+  posts: any[]
+  slug: string
+}
+
+const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
+  posts,
+  slug,
+}: PostParams) => {
   const router = useRouter()
-  const post = posts.filter((p: { slug: any }) => p.slug === slug)[0]
+  const post = posts
+    ? posts.filter((p: { slug: any }) => p.slug === slug)[0]
+    : null
 
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  return (
+  return post ? (
     <>
       <Head>
         <title>Romain Lavoix</title>
@@ -41,6 +52,8 @@ const Post: NextPageWithLayout = ({ posts, slug }) => {
         </div>
       </div>
     </>
+  ) : (
+    <></>
   )
 }
 
@@ -59,13 +72,14 @@ export async function getStaticPaths() {
     }
   `)
   return {
-    paths: posts.map(({ slug }) => ({
+    paths: posts.map(({ slug }: { slug: string }) => ({
       params: { slug },
     })),
     fallback: true,
   }
 }
 
+// @ts-ignore
 export async function getStaticProps({ params }) {
   const graphcms = new GraphQLClient(process.env.GRAPHCMS_PROJECT_API || '', {
     headers: {
@@ -93,6 +107,7 @@ export async function getStaticProps({ params }) {
   }
 }
 
+// @ts-ignore
 Post.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout posts={page.props.posts ?? []} slug={page.props.slug ?? ''}>

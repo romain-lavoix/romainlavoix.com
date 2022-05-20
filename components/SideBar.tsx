@@ -44,15 +44,19 @@ export default function Sidebar({ posts }: SidebarProps) {
             Writing
           </p>
         </div>
-        {posts.map((post) => (
-          <BlogLink
-            key={post.slug}
-            title={post.title}
-            route={`/posts/${post.slug}`}
-            selectedRoute={selectedRoute}
-            setSelectedRoute={setSelectedRoute}
-          />
-        ))}
+        {posts ? (
+          posts.map((post) => (
+            <BlogLink
+              key={post.slug}
+              title={post.title}
+              route={`/posts/${post.slug}`}
+              selectedRoute={selectedRoute}
+              setSelectedRoute={setSelectedRoute}
+            />
+          ))
+        ) : (
+          <></>
+        )}
       </nav>
       <MenuIcon
         className="m-4 h-10 w-10 rounded p-2 hover:bg-gray-200 lg:hidden"
