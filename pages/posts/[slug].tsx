@@ -58,14 +58,11 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
 }
 
 export async function getStaticPaths() {
-  const graphcms = new GraphQLClient(
-    'https://api-ap-southeast-2.graphcms.com/v2/cl2if6btg541u01xr4rrn492a/master',
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.GRAPHCMS_PROD_AUTH_TOKEN}`,
-      },
-    }
-  )
+  const graphcms = new GraphQLClient(process.env.GRAPHCMS_PROJECT_API || '', {
+    headers: {
+      Authorization: `Bearer ${process.env.GRAPHCMS_PROD_AUTH_TOKEN}`,
+    },
+  })
 
   const { posts } = await graphcms.request(gql`
     {
@@ -84,14 +81,11 @@ export async function getStaticPaths() {
 
 // @ts-ignore
 export async function getStaticProps({ params }) {
-  const graphcms = new GraphQLClient(
-    'https://api-ap-southeast-2.graphcms.com/v2/cl2if6btg541u01xr4rrn492a/master',
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.GRAPHCMS_PROD_AUTH_TOKEN}`,
-      },
-    }
-  )
+  const graphcms = new GraphQLClient(process.env.GRAPHCMS_PROJECT_API || '', {
+    headers: {
+      Authorization: `Bearer ${process.env.GRAPHCMS_PROD_AUTH_TOKEN}`,
+    },
+  })
 
   const { posts } = await graphcms.request(gql`
     {
