@@ -232,11 +232,14 @@ const Home: NextPageWithLayout = () => {
 }
 
 export async function getStaticProps() {
-  const graphcms = new GraphQLClient(process.env.GRAPHCMS_PROJECT_API || '', {
-    headers: {
-      Authorization: `Bearer ${process.env.GRAPHCMS_PROD_AUTH_TOKEN}`,
-    },
-  })
+  const graphcms = new GraphQLClient(
+    'https://api-ap-southeast-2.graphcms.com/v2/cl2if6btg541u01xr4rrn492a/master',
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.GRAPHCMS_PROD_AUTH_TOKEN}`,
+      },
+    }
+  )
 
   const { posts } = await graphcms.request(gql`
     {
@@ -257,15 +260,6 @@ export async function getStaticProps() {
     props: { posts },
   }
 }
-
-// export async function getStaticPaths() {
-//   return {
-//     paths: [
-//       { params: { ... } }
-//     ],
-//     fallback: true // false or 'blocking'
-//   };
-// }
 
 Home.getLayout = function getLayout(page: ReactElement) {
   return <Layout posts={page.props.posts}>{page}</Layout>
