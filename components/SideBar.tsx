@@ -1,5 +1,5 @@
 import MenuLink from './MenuLink'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MailIcon, XIcon } from '@heroicons/react/solid'
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
@@ -11,18 +11,24 @@ type SidebarProps = {
   posts: any[]
 }
 
+function Navbar() {
+  return <></>
+}
+
 export default function Sidebar({ posts }: SidebarProps) {
   const router = useRouter()
 
   const [selectedRoute, setSelectedRoute] = useState(router.asPath ?? '/')
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  console.log(sidebarOpen)
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+
   return (
     <>
       <nav
-        className={cls([
-          'fixed z-10 h-full w-96 border-r-[1px] bg-gray-50 p-4 transition ease-in-out lg:block',
-        ])}
+        className={
+          sidebarOpen
+            ? 'absolute inset-y-0 z-10 h-full w-96 translate-x-0 transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
+            : 'absolute z-10 h-full w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
+        }
         aria-label="Sidebar"
       >
         <div className="flex items-center gap-4 pl-2 pb-6">
