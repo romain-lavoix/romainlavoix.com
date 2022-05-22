@@ -11,33 +11,52 @@ type SidebarProps = {
   posts: any[]
 }
 
-function Navbar() {
-  return <></>
+type NavbarProps = {
+  posts: any[]
+  mobile: boolean
+  sidebarOpen: any
+  setSidebarOpen: any
+  selectedRoute: any
+  setSelectedRoute: any
 }
 
-export default function Sidebar({ posts }: SidebarProps) {
-  const router = useRouter()
-
-  const [selectedRoute, setSelectedRoute] = useState(router.asPath ?? '/')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-
+function Navbar({
+  posts,
+  mobile,
+  sidebarOpen,
+  setSidebarOpen,
+  selectedRoute,
+  setSelectedRoute,
+}: NavbarProps) {
+  let navBarClassName = ''
+  if (mobile) {
+    if (sidebarOpen) {
+      navBarClassName =
+        'absolute inset-y-0 z-10 h-full w-96 translate-x-0 transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
+    } else {
+      navBarClassName =
+        'absolute inset-y-0 z-10 h-full w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
+    }
+  } else {
+    navBarClassName =
+      'absolute inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
+  }
   return (
     <>
-      <nav
-        className={
-          sidebarOpen
-            ? 'absolute inset-y-0 z-10 h-full w-96 translate-x-0 transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
-            : 'absolute z-10 h-full w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
-        }
-        aria-label="Sidebar"
-      >
+      <nav className={navBarClassName} aria-label="Sidebar">
         <div className="flex items-center gap-4 pl-2 pb-6">
-          <XIcon
-            className={'w-4 rounded hover:bg-gray-200 lg:hidden'}
-            onClick={() => setSidebarOpen(false)}
-          />
+          {mobile ? (
+            <XIcon
+              className={'w-4 rounded hover:bg-gray-200 lg:hidden'}
+              onClick={() => setSidebarOpen(false)}
+            />
+          ) : (
+            <></>
+          )}
+
           <h1 className="text-sm font-bold antialiased">Romain Lavoix</h1>
         </div>
+
         <MenuLink
           title="Home"
           icon="Home"
@@ -64,11 +83,42 @@ export default function Sidebar({ posts }: SidebarProps) {
           <></>
         )}
       </nav>
-      <MenuIcon
-        className="m-4 h-10 w-10 rounded p-2 hover:bg-gray-200 lg:hidden"
-        onClick={() => {
-          setSidebarOpen(true)
-        }}
+      {mobile ? (
+        <MenuIcon
+          className="m-4 h-10 w-10 rounded p-2 hover:bg-gray-200 lg:hidden"
+          onClick={() => {
+            setSidebarOpen(true)
+          }}
+        />
+      ) : (
+        <></>
+      )}
+    </>
+  )
+}
+
+export default function Sidebar({ posts }: SidebarProps) {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const router = useRouter()
+  const [selectedRoute, setSelectedRoute] = useState(router.asPath ?? '/')
+
+  return (
+    <>
+      <Navbar
+        posts={posts}
+        mobile={false}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        selectedRoute={selectedRoute}
+        setSelectedRoute={setSelectedRoute}
+      />
+      <Navbar
+        posts={posts}
+        mobile={true}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        selectedRoute={selectedRoute}
+        setSelectedRoute={setSelectedRoute}
       />
     </>
   )
