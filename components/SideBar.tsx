@@ -1,11 +1,13 @@
 import MenuLink from './MenuLink'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, forwardRef } from 'react'
 import { MailIcon, XIcon } from '@heroicons/react/solid'
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
 import cls from '../utils/cls'
 import BlogLink from './BlogLink'
 import { useRouter } from 'next/router'
+// @ts-ignore
+import OutsideClickHandler from 'react-outside-click-handler'
 
 type SidebarProps = {
   posts: any[]
@@ -18,6 +20,7 @@ type NavbarProps = {
   setSidebarOpen: any
   selectedRoute: any
   setSelectedRoute: any
+  ref?: any
 }
 
 function Navbar({
@@ -32,14 +35,14 @@ function Navbar({
   if (mobile) {
     if (sidebarOpen) {
       navBarClassName =
-        'absolute inset-y-0 z-10 h-full w-96 translate-x-0 transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
+        'absolute inset-y-0 z-10 h-full w-96 translate-x-0 max-h-screen min-h-screen transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
     } else {
       navBarClassName =
-        'absolute inset-y-0 z-10 h-full w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
+        'absolute inset-y-0 z-10 h-full max-h-screen min-h-screen w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
     }
   } else {
     navBarClassName =
-      'absolute inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
+      'absolute max-h-screen min-h-screen inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
   }
   return (
     <>
@@ -63,8 +66,9 @@ function Navbar({
           route={'/'}
           selectedRoute={selectedRoute}
           setSelectedRoute={setSelectedRoute}
+          setSidebarOpen={setSidebarOpen}
         />
-        <div className="flex items-center gap-4 pl-2 pt-4">
+        <div className="flex items-center gap-4 pl-2 pt-4 pb-4">
           <p className="text-sm font-medium text-gray-500 antialiased">
             Writing
           </p>
@@ -77,6 +81,7 @@ function Navbar({
               route={`/posts/${post.slug}`}
               selectedRoute={selectedRoute}
               setSelectedRoute={setSelectedRoute}
+              setSidebarOpen={setSidebarOpen}
             />
           ))
         ) : (
@@ -101,6 +106,21 @@ export default function Sidebar({ posts }: SidebarProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const router = useRouter()
   const [selectedRoute, setSelectedRoute] = useState(router.asPath ?? '/')
+  useEffect(() => {
+    const main = document.getElementById('main')
+
+    if (sidebarOpen && main) {
+      main.classList.add('opacity-50')
+    } else if (main) {
+      main.classList.remove('opacity-50')
+    }
+  }, [sidebarOpen])
+
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [selectedRoute])
+
+  const scrollContainerRef = React.useRef(null)
 
   return (
     <>
@@ -112,14 +132,16 @@ export default function Sidebar({ posts }: SidebarProps) {
         selectedRoute={selectedRoute}
         setSelectedRoute={setSelectedRoute}
       />
-      <Navbar
-        posts={posts}
-        mobile={true}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        selectedRoute={selectedRoute}
-        setSelectedRoute={setSelectedRoute}
-      />
+      <OutsideClickHandler onOutsideClick={() => setSidebarOpen(false)}>
+        <Navbar
+          posts={posts}
+          mobile={true}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          selectedRoute={selectedRoute}
+          setSelectedRoute={setSelectedRoute}
+        />
+      </OutsideClickHandler>
     </>
   )
 }

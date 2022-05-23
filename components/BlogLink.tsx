@@ -10,6 +10,7 @@ type Props = {
   route: string
   selectedRoute: any
   setSelectedRoute: any
+  setSidebarOpen: any
 }
 import cls from '../utils/cls'
 
@@ -18,6 +19,7 @@ const BlogLink = ({
   route = '/',
   selectedRoute,
   setSelectedRoute,
+  setSidebarOpen,
 }: Props) => {
   const activated = route === selectedRoute
 
@@ -25,21 +27,17 @@ const BlogLink = ({
     <Link href={route}>
       <a
         className={cls([
-          'mb-1 flex  h-8 items-center justify-center rounded',
-          activated ? 'bg-black' : 'hover:bg-gray-200',
+          'flex rounded py-3 px-3.5 text-left text-sm font-medium antialiased',
+          activated ? 'bg-black text-white' : 'text-black hover:bg-gray-200',
         ])}
-        onClick={() => setSelectedRoute(route)}
+        onClick={() => {
+          setSelectedRoute(route)
+          if (activated) {
+            setSidebarOpen(false)
+          }
+        }}
       >
-        <span className="flex w-full p-2">
-          <span
-            className={cls([
-              ' ml-3 text-left text-sm antialiased',
-              activated ? 'text-white' : 'text-black',
-            ])}
-          >
-            {title}
-          </span>
-        </span>
+        {title}
       </a>
     </Link>
   )

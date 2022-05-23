@@ -1,13 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import MenuLink from '../components/MenuLink'
-import Link from 'next/link'
 import Image from 'next/image'
 import HomeLink from '../components/HomeLink'
 import HomeLinkTitle from '../components/HomeLinkTitle'
-import { Menu } from '@headlessui/react'
 import Layout from '../components/Layout'
-import Sidebar from '../components/SideBar'
 import { ReactElement, ReactNode } from 'react'
 import { GraphQLClient, gql } from 'graphql-request'
 
