@@ -8,6 +8,7 @@ import Link from 'next/link'
 type Props = {
   title: string
   route: string
+  date: string
   selectedRoute: any
   setSelectedRoute: any
   setSidebarOpen: any
@@ -20,6 +21,7 @@ const BlogLink = ({
   selectedRoute,
   setSelectedRoute,
   setSidebarOpen,
+  date,
 }: Props) => {
   const activated = route === selectedRoute
 
@@ -27,8 +29,8 @@ const BlogLink = ({
     <Link href={route}>
       <a
         className={cls([
-          'flex rounded py-3 px-3.5 text-left text-sm font-medium antialiased',
-          activated ? 'bg-black text-white' : 'text-black hover:bg-gray-200',
+          'mt-1 flex rounded py-3 px-3.5 text-left  text-sm antialiased',
+          activated ? 'bg-black text-white' : 'text-gray-900 hover:bg-gray-200',
         ])}
         onClick={() => {
           setSelectedRoute(route)
@@ -37,7 +39,14 @@ const BlogLink = ({
           }
         }}
       >
-        {title}
+        <span>
+          <div className="font-medium">{title}</div>
+          <div className="mt-1 opacity-40">
+            {new Intl.DateTimeFormat('en-US', {
+              dateStyle: 'long',
+            }).format(new Date(date))}
+          </div>
+        </span>
       </a>
     </Link>
   )

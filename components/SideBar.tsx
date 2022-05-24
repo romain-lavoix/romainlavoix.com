@@ -1,9 +1,7 @@
 import MenuLink from './MenuLink'
-import React, { useState, useEffect, useRef, forwardRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MailIcon, XIcon } from '@heroicons/react/solid'
-import { Dialog, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
-import cls from '../utils/cls'
 import BlogLink from './BlogLink'
 import { useRouter } from 'next/router'
 // @ts-ignore
@@ -35,14 +33,14 @@ function Navbar({
   if (mobile) {
     if (sidebarOpen) {
       navBarClassName =
-        'absolute inset-y-0 z-10 h-full w-96 translate-x-0 max-h-screen min-h-screen transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
+        'absolute inset-y-0 z-10 h-full w-96 translate-x-0 flex-auto overflow-y-scroll absolute max-h-screen min-h-screen transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
     } else {
       navBarClassName =
-        'absolute inset-y-0 z-10 h-full max-h-screen min-h-screen w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
+        'absolute inset-y-0 z-10 h-full flex-auto overflow-y-scroll absolute max-h-screen min-h-screen w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
     }
   } else {
     navBarClassName =
-      'absolute max-h-screen min-h-screen inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
+      'flex-auto overflow-y-auto absolute max-h-screen min-h-screen inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
   }
   return (
     <>
@@ -76,6 +74,7 @@ function Navbar({
         {posts ? (
           posts.map((post) => (
             <BlogLink
+              date={post.date}
               key={post.slug}
               title={post.title}
               route={`/posts/${post.slug}`}
@@ -119,8 +118,6 @@ export default function Sidebar({ posts }: SidebarProps) {
   useEffect(() => {
     setSidebarOpen(false)
   }, [selectedRoute])
-
-  const scrollContainerRef = React.useRef(null)
 
   return (
     <>
