@@ -9,6 +9,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Open+Sans"
             rel="stylesheet"
           />
+          <meta name="Accept-Encoding" content="br" />
         </Head>
         <body className="h-full">
           <Main />

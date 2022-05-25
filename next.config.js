@@ -2,4 +2,5 @@
 module.exports = {
   reactStrictMode: true,
   'Cache-Control': 'public, max-age=31536000, immutable',
+  compress: true,
 }
