@@ -75,9 +75,9 @@ function Navbar({
           posts.map((post) => (
             <BlogLink
               date={post.date}
-              key={post.slug}
-              title={post.title}
-              route={`/posts/${post.slug}`}
+              key={post.meta.slug}
+              title={post.meta.title}
+              route={`/posts/${post.meta.slug}`}
               selectedRoute={selectedRoute}
               setSelectedRoute={setSelectedRoute}
               setSidebarOpen={setSidebarOpen}

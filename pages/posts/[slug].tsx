@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
 import { gql, GraphQLClient } from 'graphql-request'
+import Image from 'next/image'
 
 type NextPageWithLayout = NextPage & {
   posts: any[]
@@ -23,10 +24,12 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
 }: PostParams) => {
   const router = useRouter()
   const post = posts
-    ? posts.filter((p: { slug: any }) => p.slug === slug)[0]
+    ? posts.filter(
+        (post: { meta: { slug: any } }) => post.meta.slug === slug
+      )[0]
     : null
 
-  if (!router.isFallback && !post?.slug) {
+  if (!router.isFallback && !post?.meta.slug) {
     return <ErrorPage statusCode={404} />
   }
 
@@ -45,10 +48,29 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
       </Head>
       <div className="grid grid-cols-12 pb-16">
         <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
-          <article
-            className="prose prose-gray text-justify prose-a:text-blue-600"
-            dangerouslySetInnerHTML={{ __html: post.content?.html }}
-          ></article>
+          <article className="prose prose-gray text-justify prose-a:text-blue-600">
+            {post.blocks ? (
+              post.blocks.map(
+                (block: { id: string; content?: any; image?: any }) =>
+                  block.content ? (
+                    <div
+                      key={block.id}
+                      dangerouslySetInnerHTML={{ __html: block.content?.html }}
+                    ></div>
+                  ) : (
+                    <Image
+                      key={block.id}
+                      src={block.image.url}
+                      width={block.image.width}
+                      height={block.image.height}
+                      alt={block.image.filename}
+                    />
+                  )
+              )
+            ) : (
+              <></>
+            )}
+          </article>
         </div>
       </div>
     </>
@@ -67,14 +89,23 @@ export async function getStaticPaths() {
   const { posts } = await graphcms.request(gql`
     {
       posts {
-        slug
+        meta {
+          slug
+        }
       }
     }
   `)
+
+  const paths = posts.map((post: { meta: { slug: any } }) => {
+    return {
+      params: {
+        slug: post.meta.slug,
+      },
+    }
+  })
+
   return {
-    paths: posts.map(({ slug }: { slug: string }) => ({
-      params: { slug },
-    })),
+    paths,
     fallback: true,
   }
 }
@@ -90,13 +121,28 @@ export async function getStaticProps({ params }) {
   const { posts } = await graphcms.request(gql`
     {
       posts {
-        id
-        title
-        slug
-        description
         date
-        content {
-          html
+        meta {
+          title
+          description
+          slug
+        }
+        blocks {
+          ... on Content {
+            id
+            content {
+              html
+            }
+          }
+          ... on Image {
+            id
+            image {
+              fileName
+              url
+              width
+              height
+            }
+          }
         }
       }
     }

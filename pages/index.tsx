@@ -237,13 +237,28 @@ export async function getStaticProps() {
   const { posts } = await graphcms.request(gql`
     {
       posts {
-        id
-        title
-        slug
-        description
         date
-        content {
-          html
+        meta {
+          title
+          description
+          slug
+        }
+        blocks {
+          ... on Content {
+            id
+            content {
+              html
+            }
+          }
+          ... on Image {
+            id
+            image {
+              fileName
+              url
+              width
+              height
+            }
+          }
         }
       }
     }
