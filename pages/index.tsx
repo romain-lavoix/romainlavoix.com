@@ -252,6 +252,8 @@ export async function getStaticProps() {
           }
           ... on Image {
             id
+            alt
+            title
             image {
               fileName
               url

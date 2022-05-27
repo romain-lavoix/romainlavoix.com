@@ -50,7 +50,13 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
           <article className="prose prose-gray text-justify prose-a:text-blue-600">
             {post.blocks ? (
               post.blocks.map(
-                (block: { id: string; content?: any; image?: any }) =>
+                (block: {
+                  alt: string
+                  title: string
+                  id: string
+                  content?: any
+                  image?: any
+                }) =>
                   block.content ? (
                     <div
                       key={block.id}
@@ -60,9 +66,11 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
                     <Image
                       key={block.id}
                       src={block.image.url}
-                      width={655}
-                      height={491}
-                      alt={block.image.filename}
+                      width={block.image.width}
+                      height={block.image.height}
+                      alt={block.alt}
+                      title={block.title}
+                      layout="responsive"
                     />
                   )
               )
@@ -135,6 +143,8 @@ export async function getStaticProps({ params }) {
           }
           ... on Image {
             id
+            alt
+            title
             image {
               fileName
               url
