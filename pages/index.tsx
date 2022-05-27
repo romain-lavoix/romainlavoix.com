@@ -29,7 +29,7 @@ const Home: NextPageWithLayout = () => {
         <meta property="og:description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="grid grid-cols-12 pb-16">
+      <div className="grid grid-cols-12 pt-12">
         <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
           <div className="relative float-left mr-2 h-[120px] w-[120px] rounded border">
             <Image

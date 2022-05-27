@@ -88,14 +88,14 @@ function Navbar({
         )}
       </nav>
       {mobile ? (
-        <>
+        <div className="shadow">
           <MenuIcon
-            className=" h-10 w-10 rounded p-2  hover:bg-gray-200 lg:hidden"
+            className=" h-10 w-10 rounded p-2 lg:hidden"
             onClick={() => {
               setSidebarOpen(true)
             }}
           />
-        </>
+        </div>
       ) : (
         <></>
       )}
