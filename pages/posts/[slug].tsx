@@ -66,7 +66,7 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
       </Head>
       <div className="grid grid-cols-12 pb-16">
         <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
-          <article className="prose prose-gray text-justify prose-a:text-blue-600">
+          <article className="prose prose-gray prose-a:text-blue-600">
             {post.blocks ? (
               post.blocks.map(
                 (block: {
