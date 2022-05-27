@@ -88,12 +88,14 @@ function Navbar({
         )}
       </nav>
       {mobile ? (
-        <MenuIcon
-          className="m-4 h-10 w-10 rounded p-2 hover:bg-gray-200 lg:hidden"
-          onClick={() => {
-            setSidebarOpen(true)
-          }}
-        />
+        <>
+          <MenuIcon
+            className=" h-10 w-10 rounded p-2  hover:bg-gray-200 lg:hidden"
+            onClick={() => {
+              setSidebarOpen(true)
+            }}
+          />
+        </>
       ) : (
         <></>
       )}

@@ -12,11 +12,10 @@ export default function Layout({ children }: LayoutProps) {
     <div className="max-h-screen antialiased">
       <div className="w-full flex-row lg:flex">
         <Sidebar posts={children.props.posts} />
-        {/*lg:ml-96*/}
         <div className="max-h-screen min-h-screen flex-1 overflow-y-auto lg:ml-96">
           <main id="main">
             <div className="relative h-full w-full pb-16 lg:flex">
-              <div className="flex w-full justify-center px-4 pt-32">
+              <div className="flex w-full justify-center px-4 lg:pt-32">
                 <div>{children}</div>
               </div>
             </div>
