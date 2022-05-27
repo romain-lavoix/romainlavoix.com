@@ -88,7 +88,7 @@ function Navbar({
         )}
       </nav>
       {mobile ? (
-        <div className="shadow">
+        <div className="pl-2 shadow">
           <MenuIcon
             className=" h-10 w-10 rounded p-2 lg:hidden"
             onClick={() => {
