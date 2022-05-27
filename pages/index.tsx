@@ -136,7 +136,7 @@ const Home: NextPageWithLayout = () => {
           subtitle2={'2017-2019'}
         />
         <HomeLink
-          title={'Octo Technology Australia'}
+          title={'Octo Technology Aus'}
           link={new URL('https://tealforge.com/')}
           subtitle={'Software Engineer'}
           subtitle2={'2016'}
@@ -156,7 +156,7 @@ const Home: NextPageWithLayout = () => {
         <HomeLink
           title={'Siemens Bangalore'}
           link={new URL('https://siemens.com/')}
-          subtitle={'Software Engineer Intern'}
+          subtitle={'Software Eng Intern'}
           subtitle2={'2007'}
         />
       </div>
