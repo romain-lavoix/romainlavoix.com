@@ -1,7 +1,6 @@
 import { NextPage } from 'next'
-import { ReactElement, ReactNode } from 'react'
+import { ReactElement } from 'react'
 import Layout from '../../components/Layout'
-import Home from '../index'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
@@ -61,8 +60,8 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
                     <Image
                       key={block.id}
                       src={block.image.url}
-                      width={block.image.width}
-                      height={block.image.height}
+                      width={655}
+                      height={491}
                       alt={block.image.filename}
                     />
                   )
