@@ -7,17 +7,17 @@ class MyDocument extends Document {
         <Head>
           {/*  article */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Merriweather&display=optional"
+            href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
             rel="stylesheet"
           />
           {/*  UI */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Lato&display=optional"
+            href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
             rel="stylesheet"
           />
           {/*  Headlines */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Roboto&display=optional"
+            href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
             rel="stylesheet"
           />
           <meta name="Accept-Encoding" content="br" />
