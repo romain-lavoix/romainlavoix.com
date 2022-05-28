@@ -50,17 +50,23 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
       <Head>
         <title>Romain Lavoix</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" content={post.title} key="title" />
-        <meta name="description" content={post.description} />
+        <meta property="og:title" content={post.meta.title} key="title" />
+        <meta name="description" content={post.meta.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="romainlavoix.com" />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.description} />
+        <meta property="og:title" content={post.meta.title} />
+        <meta property="og:description" content={post.meta.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="grid grid-cols-12 pb-16">
-        <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
-          <article className=" prose prose-slate font-merriweather prose-h3:font-roboto prose-a:text-blue-600">
+        <div className="col-span-12 col-start-1  lg:col-span-10 lg:col-start-2">
+          <article className="prose-h5:font-roboto prose prose-slate mt-10 font-merriweather prose-h2:font-roboto prose-h3:font-roboto prose-a:text-blue-600 ">
+            <h2>{post.meta.title}</h2>
+            <h5 className="opacity-50">
+              {new Intl.DateTimeFormat('en-US', {
+                dateStyle: 'long',
+              }).format(new Date(post.date))}
+            </h5>
             {post.blocks ? (
               post.blocks.map(
                 (block: {
