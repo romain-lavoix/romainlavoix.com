@@ -1,4 +1,3 @@
-import { HomeIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 
 type Props = {
@@ -8,9 +7,9 @@ type Props = {
   subtitle2?: String
 }
 
-const HomeLink = ({ title, link, subtitle, subtitle2 }: Props) => {
+const HomeLink = ({ title, subtitle, subtitle2 }: Props) => {
   return (
-    <div className="col-span-12 col-start-1   lg:col-span-10 lg:col-start-2">
+    <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
       <Link href="/">
         <a
           target="_blank"

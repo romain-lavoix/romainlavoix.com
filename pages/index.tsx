@@ -6,6 +6,8 @@ import HomeLinkTitle from '../components/HomeLinkTitle'
 import Layout from '../components/Layout'
 import { ReactElement, ReactNode } from 'react'
 import { GraphQLClient, gql } from 'graphql-request'
+const rom_grey = require('../public/rom_grey.jpg')
+const map = require('../public/map.png')
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -33,15 +35,16 @@ const Home: NextPageWithLayout = () => {
         <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
           <div className="relative float-left mr-2 h-[120px] w-[120px] rounded border">
             <Image
-              src="/rom_grey.jpg"
-              alt="picture of author"
-              layout="fill"
-              objectFit="cover"
+              src={rom_grey}
+              alt="picture of romain lavoix"
+              layout="responsive"
+              width={118}
+              height={118}
               className="rounded"
-              priority
+              placeholder="blur"
             ></Image>
           </div>
-          <article className="prose prose-gray text-justify prose-a:text-blue-600">
+          <article className="prose prose-slate text-justify font-merriweather prose-a:text-blue-600">
             <p>
               Hi, I'm Romain. I'm a software engineer and product owner,
               experienced in working across the whole stack, and in shipping web
@@ -102,7 +105,7 @@ const Home: NextPageWithLayout = () => {
               <a
                 className=" no-underline hover:underline"
                 target="_blank"
-                href="rendezvous.nc"
+                href="https://rendezvous.nc"
               >
                 appointment booking service
               </a>
@@ -113,7 +116,7 @@ const Home: NextPageWithLayout = () => {
           </article>
           <button
             type="button"
-            className="mt-6 inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-bold text-gray-600 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="mt-6 mb-16 inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 font-lato text-xs font-bold text-gray-600 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             <a target="_blank" href="https://poly.work/romainlavoix">
               View changelog
@@ -121,7 +124,7 @@ const Home: NextPageWithLayout = () => {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-12 gap-4 pb-16">
+      <div className="grid grid-cols-12 gap-4 pb-16 font-lato">
         <HomeLinkTitle title={'Work'} />
         <HomeLink
           title={'TealForge'}
@@ -160,15 +163,17 @@ const Home: NextPageWithLayout = () => {
           subtitle2={'2007'}
         />
       </div>
-      <div className="grid grid-cols-12 gap-4 pb-16">
+      <div className="grid grid-cols-12 gap-4 pb-16 font-lato">
         <HomeLinkTitle title={'Where'} />
         <div className="col-span-12 items-center gap-4 lg:col-span-10 lg:col-start-2">
           <div className="relative mb-2 h-[300px] w-full">
             <Image
-              src="/map.png"
-              objectFit="cover"
+              src={map}
               className="rounded-3xl"
-              layout="fill"
+              layout="responsive"
+              width={652}
+              height={300}
+              placeholder="blur"
             />
           </div>
           <div className="grid justify-items-end">
@@ -193,7 +198,7 @@ const Home: NextPageWithLayout = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-12 gap-4 pb-16 ">
+      <div className="grid grid-cols-12 gap-4 pb-16 font-lato ">
         <HomeLinkTitle title={'Online'} />
         <HomeLink
           title={'Twitter'}

@@ -1,6 +1,6 @@
 import MenuLink from './MenuLink'
 import React, { useState, useEffect } from 'react'
-import { MailIcon, XIcon } from '@heroicons/react/solid'
+import { XIcon } from '@heroicons/react/solid'
 import { MenuIcon } from '@heroicons/react/outline'
 import BlogLink from './BlogLink'
 import { useRouter } from 'next/router'
@@ -33,14 +33,14 @@ function Navbar({
   if (mobile) {
     if (sidebarOpen) {
       navBarClassName =
-        'absolute inset-y-0 z-10 h-full w-96 translate-x-0 flex-auto overflow-y-scroll absolute max-h-screen min-h-screen transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
+        'font-lato absolute inset-y-0 z-10 h-full w-96 translate-x-0 flex-auto overflow-y-scroll absolute max-h-screen min-h-screen transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
     } else {
       navBarClassName =
-        'absolute inset-y-0 z-10 h-full flex-auto overflow-y-scroll absolute max-h-screen min-h-screen w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
+        'font-lato absolute inset-y-0 z-10 h-full flex-auto overflow-y-scroll absolute max-h-screen min-h-screen w-96 -translate-x-full transform border-r-[1px] bg-gray-50  p-4 transition duration-200 ease-out lg:block'
     }
   } else {
     navBarClassName =
-      'flex-auto overflow-y-auto absolute max-h-screen min-h-screen inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
+      'font-lato flex-auto overflow-y-auto absolute max-h-screen min-h-screen inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
   }
   return (
     <>
@@ -55,7 +55,9 @@ function Navbar({
             <></>
           )}
 
-          <h1 className="text-sm font-bold antialiased">Romain Lavoix</h1>
+          <h1 className="font-roboto text-sm font-bold antialiased">
+            Romain Lavoix
+          </h1>
         </div>
 
         <MenuLink

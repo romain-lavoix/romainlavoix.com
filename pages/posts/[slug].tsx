@@ -1,4 +1,3 @@
-import { NextPage } from 'next'
 import { ReactElement } from 'react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
@@ -6,11 +5,6 @@ import Head from 'next/head'
 import ErrorPage from 'next/error'
 import { gql, GraphQLClient } from 'graphql-request'
 import Image from 'next/image'
-
-type NextPageWithLayout = NextPage & {
-  posts: any[]
-  slug: string
-}
 
 type PostParams = {
   posts: any[]
@@ -33,7 +27,7 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
   }
 
   const shimmer = (w: number, h: number) => `
-<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="${w}" height="${h}"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <linearGradient id="g">
       <stop stop-color="#333" offset="20%" />
@@ -66,7 +60,7 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
       </Head>
       <div className="grid grid-cols-12 pb-16">
         <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
-          <article className="prose prose-gray prose-a:text-blue-600">
+          <article className=" prose prose-slate font-merriweather prose-h3:font-roboto prose-a:text-blue-600">
             {post.blocks ? (
               post.blocks.map(
                 (block: {

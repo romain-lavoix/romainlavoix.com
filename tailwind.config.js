@@ -3,11 +3,14 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: {
-    fontFamily: {
-      // sans: ['Open'],
-    },
-    extend: {},
-  },
   plugins: [require('@tailwindcss/typography')],
+  theme: {
+    extend: {
+      fontFamily: {
+        merriweather: ['Merriweather'],
+        lato: ['Lato'],
+        roboto: ['Roboto'],
+      },
+    },
+  },
 }
