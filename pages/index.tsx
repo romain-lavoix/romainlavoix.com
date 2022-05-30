@@ -235,7 +235,7 @@ const Home: NextPageWithLayout = () => {
 export async function getStaticProps() {
   const graphcms = new GraphQLClient(process.env.GRAPHCMS_PROJECT_API || '', {
     headers: {
-      Authorization: `Bearer ${process.env.GRAPHCMS_PROD_AUTH_TOKEN}`,
+      Authorization: `Bearer ${process.env.GRAPHCMS_AUTH_TOKEN}`,
     },
   })
 
