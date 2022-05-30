@@ -82,19 +82,21 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
                       dangerouslySetInnerHTML={{ __html: block.content?.html }}
                     ></div>
                   ) : (
-                    <Image
-                      key={block.id}
-                      src={block.image.url}
-                      width={block.image.width}
-                      height={block.image.height}
-                      alt={block.alt}
-                      title={block.title}
-                      layout="responsive"
-                      placeholder="blur"
-                      blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                        shimmer(700, 475)
-                      )}`}
-                    />
+                    <p>
+                      <Image
+                        key={block.id}
+                        src={block.image.url}
+                        width={block.image.width}
+                        height={block.image.height}
+                        alt={block.alt}
+                        title={block.title}
+                        layout="responsive"
+                        placeholder="blur"
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                          shimmer(700, 475)
+                        )}`}
+                      />
+                    </p>
                   )
               )
             ) : (
