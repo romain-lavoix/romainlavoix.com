@@ -49,6 +49,7 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
     <>
       <Head>
         <title>Romain Lavoix</title>
+        <link rel="canonical" href={`https://romainlavoix.com/posts/${slug}`} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:title" content={post.meta.title} key="title" />
         <meta name="description" content={post.meta.description} />
@@ -75,6 +76,7 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
                   id: string
                   content?: any
                   image?: any
+                  video?: any
                 }) =>
                   block.content ? (
                     <div
@@ -83,19 +85,34 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
                     ></div>
                   ) : (
                     <p>
-                      <Image
-                        key={block.id}
-                        src={block.image.url}
-                        width={block.image.width}
-                        height={block.image.height}
-                        alt={block.alt}
-                        title={block.title}
-                        layout="responsive"
-                        placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                          shimmer(700, 475)
-                        )}`}
-                      />
+                      {block.video ? (
+                        <video
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          controls
+                          key={block.video.id}
+                          width={block.video.width}
+                          height={block.video.height}
+                        >
+                          <source type="video/mp4" src={block.video.url} />
+                        </video>
+                      ) : (
+                        <Image
+                          key={block.id}
+                          src={block.image.url}
+                          width={block.image.width}
+                          height={block.image.height}
+                          alt={block.alt}
+                          title={block.title}
+                          layout="responsive"
+                          placeholder="blur"
+                          blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                            shimmer(700, 475)
+                          )}`}
+                        />
+                      )}
                     </p>
                   )
               )
@@ -175,6 +192,15 @@ export async function getStaticProps({ params }) {
               url
               width
               height
+            }
+          }
+          ... on Video {
+            title
+            video {
+              id
+              url
+              height
+              width
             }
           }
         }

@@ -22,6 +22,7 @@ const Home: NextPageWithLayout = () => {
     <>
       <Head>
         <title>Romain Lavoix</title>
+        <link rel="canonical" href="https://romainlavoix.com" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:title" content={title} key="title" />
         <meta name="description" content={description} />
@@ -264,6 +265,15 @@ export async function getStaticProps() {
               url
               width
               height
+            }
+          }
+          ... on Video {
+            title
+            video {
+              id
+              url
+              height
+              width
             }
           }
         }

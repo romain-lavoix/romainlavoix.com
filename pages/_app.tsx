@@ -6,6 +6,7 @@ import type { AppProps } from 'next/app'
 import * as ga from '../lib/ga'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -35,7 +36,30 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   const getLayout = Component.getLayout ?? ((page) => page)
 
-  return getLayout(<Component {...pageProps} />)
+  return (
+    <>
+      <>
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+          strategy="afterInteractive"
+        />
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
+      </>
+      {getLayout(<Component {...pageProps} />)}
+    </>
+  )
 }
 
 export default MyApp
