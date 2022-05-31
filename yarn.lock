@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@corex/deepmerge@^2.6.148":
+  version "2.6.148"
+  resolved "https://registry.yarnpkg.com/@corex/deepmerge/-/deepmerge-2.6.148.tgz#8fa825d53ffd1cbcafce1b6a830eefd3dcc09dd5"
+  integrity sha512-6QMz0/2h5C3ua51iAnXMPWFbb1QOU1UvSM4bKBw5mzdT+WtLgjbETBBIQZ+Sh9WvEcGwlAt/DEdRpIC3XlDBMA==
+
 "@headlessui/react@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.5.0.tgz#483b44ba2c8b8d4391e1d2c863898d7dd0cc0296"
@@ -916,7 +921,7 @@ mimic-response@^3.1.0:
   resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-3.1.0.tgz#2d1d59af9c1b129815accc2c46a022a5ce1fa3c9"
   integrity sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ==
 
-minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.3:
+minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
@@ -935,6 +940,14 @@ napi-build-utils@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/napi-build-utils/-/napi-build-utils-1.0.2.tgz#b1fddc0b2c46e380a0b7a76f984dd47c41a13806"
   integrity sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==
+
+next-sitemap@^2.5.28:
+  version "2.5.28"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-2.5.28.tgz#c061914edcc74268e43254710dec0a0febae5fa4"
+  integrity sha512-rDMTa7nLE0ikYnu8JDCrwQufIRm4b4Sg8BK11DGdDAmYpXmcmw4Qvm+oVBR8gUL97E6i2ihTM+cRx8mgENDACA==
+  dependencies:
+    "@corex/deepmerge" "^2.6.148"
+    minimist "^1.2.6"
 
 next@latest:
   version "12.1.5"
