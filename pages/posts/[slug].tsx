@@ -23,8 +23,8 @@ const Post: ({ post, posts, slug }: PostParams) => JSX.Element = ({
     return <ErrorPage statusCode={404} />
   }
 
-  const shimmer = (w: number, h: number, key: number) => `
-<svg width="${w}" height="${h}"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" key={key}>
+  const shimmer = (w: number, h: number) => `
+<svg width="${w}" height="${h}"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <linearGradient id="g">
       <stop stop-color="#333" offset="20%" />
@@ -96,7 +96,7 @@ const Post: ({ post, posts, slug }: PostParams) => JSX.Element = ({
                         </video>
                       ) : (
                         <Image
-                          key={block.image.id}
+                          key={block.id}
                           src={block.image.url}
                           width={block.image.width}
                           height={block.image.height}
@@ -105,7 +105,7 @@ const Post: ({ post, posts, slug }: PostParams) => JSX.Element = ({
                           layout="responsive"
                           placeholder="blur"
                           blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                            shimmer(700, 475, block.image.id)
+                            shimmer(700, 475)
                           )}`}
                         />
                       )}

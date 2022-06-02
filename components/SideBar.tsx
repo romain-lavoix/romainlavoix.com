@@ -74,17 +74,21 @@ function Navbar({
           </p>
         </div>
         {posts ? (
-          posts.map((post) => (
-            <BlogLink
-              date={post.date}
-              key={post.slug}
-              title={post.title}
-              route={`/posts/${post.slug}`}
-              selectedRoute={selectedRoute}
-              setSelectedRoute={setSelectedRoute}
-              setSidebarOpen={setSidebarOpen}
-            />
-          ))
+          posts
+            .sort((a, b) =>
+              new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1
+            )
+            .map((post) => (
+              <BlogLink
+                date={post.date}
+                key={post.slug}
+                title={post.title}
+                route={`/posts/${post.slug}`}
+                selectedRoute={selectedRoute}
+                setSelectedRoute={setSelectedRoute}
+                setSidebarOpen={setSidebarOpen}
+              />
+            ))
         ) : (
           <></>
         )}
