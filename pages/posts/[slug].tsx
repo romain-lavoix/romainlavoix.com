@@ -8,26 +8,23 @@ import Image from 'next/image'
 
 type PostParams = {
   posts: any[]
+  post: any
   slug: string
 }
 
-const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
+const Post: ({ post, posts, slug }: PostParams) => JSX.Element = ({
   posts,
+  post,
   slug,
 }: PostParams) => {
   const router = useRouter()
-  const post = posts
-    ? posts.filter(
-        (post: { meta: { slug: any } }) => post.meta.slug === slug
-      )[0]
-    : null
 
-  if (!router.isFallback && !post?.meta.slug) {
+  if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  const shimmer = (w: number, h: number) => `
-<svg width="${w}" height="${h}"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  const shimmer = (w: number, h: number, key: number) => `
+<svg width="${w}" height="${h}"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" key={key}>
   <defs>
     <linearGradient id="g">
       <stop stop-color="#333" offset="20%" />
@@ -37,7 +34,7 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
   </defs>
   <rect width="${w}" height="${h}" fill="#333" />
   <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+  <animate xlink:Href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
 </svg>`
 
   const toBase64 = (str: string) =>
@@ -51,18 +48,18 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
         <title>Romain Lavoix</title>
         <link rel="canonical" href={`https://romainlavoix.com/posts/${slug}`} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" content={post.meta.title} key="title" />
-        <meta name="description" content={post.meta.description} />
+        <meta property="og:title" content={post.title} key="title" />
+        <meta name="description" content={post.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="romainlavoix.com" />
-        <meta property="og:title" content={post.meta.title} />
-        <meta property="og:description" content={post.meta.description} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="grid grid-cols-12 pb-16">
         <div className="col-span-12 col-start-1  lg:col-span-10 lg:col-start-2">
           <article className="prose-h5:font-roboto prose prose-slate mt-10 font-merriweather prose-h2:font-roboto prose-h3:font-roboto prose-a:text-blue-600 ">
-            <h2>{post.meta.title}</h2>
+            <h2>{post.title}</h2>
             <h5 className="opacity-50">
               {new Intl.DateTimeFormat('en-US', {
                 dateStyle: 'long',
@@ -91,7 +88,6 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
                           muted
                           loop
                           playsInline
-                          controls
                           key={block.video.id}
                           width={block.video.width}
                           height={block.video.height}
@@ -100,7 +96,7 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
                         </video>
                       ) : (
                         <Image
-                          key={block.id}
+                          key={block.image.id}
                           src={block.image.url}
                           width={block.image.width}
                           height={block.image.height}
@@ -109,7 +105,7 @@ const Post: ({ posts, slug }: PostParams) => JSX.Element = ({
                           layout="responsive"
                           placeholder="blur"
                           blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                            shimmer(700, 475)
+                            shimmer(700, 475, block.image.id)
                           )}`}
                         />
                       )}
@@ -138,17 +134,15 @@ export async function getStaticPaths() {
   const { posts } = await graphcms.request(gql`
     {
       posts {
-        meta {
-          slug
-        }
+        slug
       }
     }
   `)
-
-  const paths = posts.map((post: { meta: { slug: any } }) => {
+  console.log(JSON.stringify(posts))
+  const paths = posts.map((post: { slug: string }) => {
     return {
       params: {
-        slug: post.meta.slug,
+        slug: post.slug,
       },
     }
   })
@@ -167,49 +161,57 @@ export async function getStaticProps({ params }) {
     },
   })
 
-  const { posts } = await graphcms.request(gql`
-    {
-      posts {
-        date
-        meta {
+  const { posts, post } = await graphcms.request(
+    gql`
+      query getPosts($slug: String!) {
+        posts {
+          date
+          slug
+          title
+        }
+        post(where: { slug: $slug }) {
+          date
+          slug
           title
           description
-          slug
-        }
-        blocks {
-          ... on Content {
-            id
-            content {
-              html
-            }
-          }
-          ... on Image {
-            id
-            alt
-            title
-            image {
-              fileName
-              url
-              width
-              height
-            }
-          }
-          ... on Video {
-            title
-            video {
+          blocks {
+            ... on Content {
               id
-              url
-              height
-              width
+              content {
+                html
+              }
+            }
+            ... on Image {
+              id
+              alt
+              title
+              image {
+                fileName
+                url
+                width
+                height
+              }
+            }
+            ... on Video {
+              title
+              video {
+                id
+                url
+                height
+                width
+              }
             }
           }
         }
       }
+    `,
+    {
+      slug: params.slug,
     }
-  `)
+  )
 
   return {
-    props: { posts, slug: params.slug },
+    props: { posts, post, slug: params.slug },
   }
 }
 

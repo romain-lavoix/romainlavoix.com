@@ -244,39 +244,8 @@ export async function getStaticProps() {
     {
       posts {
         date
-        meta {
-          title
-          description
-          slug
-        }
-        blocks {
-          ... on Content {
-            id
-            content {
-              html
-            }
-          }
-          ... on Image {
-            id
-            alt
-            title
-            image {
-              fileName
-              url
-              width
-              height
-            }
-          }
-          ... on Video {
-            title
-            video {
-              id
-              url
-              height
-              width
-            }
-          }
-        }
+        slug
+        title
       }
     }
   `)
