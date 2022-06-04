@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -79,14 +79,14 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
                       dangerouslySetInnerHTML={{ __html: block.content?.html }}
                     ></div>
                   ) : (
-                    <p>
+                    <p key={block.id}>
                       {block.video ? (
                         <video
+                          key={block.video.id}
                           autoPlay
                           muted
                           loop
                           playsInline
-                          key={block.video.id}
                           width={block.video.width}
                           height={block.video.height}
                         >
@@ -94,7 +94,7 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
                         </video>
                       ) : (
                         <Image
-                          key={block.id}
+                          key={block.image.id}
                           src={block.image.url}
                           width={block.image.width}
                           height={block.image.height}
@@ -191,8 +191,8 @@ export async function getStaticProps({ params }) {
             }
             ... on Video {
               title
+              id
               video {
-                id
                 url
                 height
                 width
