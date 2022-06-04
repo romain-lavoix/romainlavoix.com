@@ -5,7 +5,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en" className="h-full, overflow-auto">
         <Head>
-          <title>Romain Lavoix</title>
           <meta
             property="og:image"
             content={'https://romainlavoix.com/ogimage.png'}
