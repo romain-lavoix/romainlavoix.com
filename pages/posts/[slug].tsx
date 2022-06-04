@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -7,13 +7,11 @@ import { gql, GraphQLClient } from 'graphql-request'
 import Image from 'next/image'
 
 type PostParams = {
-  posts: any[]
   post: any
   slug: string
 }
 
-const Post: ({ post, posts, slug }: PostParams) => JSX.Element = ({
-  posts,
+const Post: ({ post, slug }: PostParams) => JSX.Element = ({
   post,
   slug,
 }: PostParams) => {
@@ -45,7 +43,7 @@ const Post: ({ post, posts, slug }: PostParams) => JSX.Element = ({
   return post ? (
     <>
       <Head>
-        <title>Romain Lavoix</title>
+        <title>{post.title}</title>
         <link rel="canonical" href={`https://romainlavoix.com/posts/${slug}`} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:title" content={post.title} key="title" />
@@ -138,7 +136,6 @@ export async function getStaticPaths() {
       }
     }
   `)
-  console.log(JSON.stringify(posts))
   const paths = posts.map((post: { slug: string }) => {
     return {
       params: {

@@ -135,19 +135,23 @@ const Home: NextPageWithLayout = () => {
         />
         <HomeLink
           title={'ClacTaCom'}
-          link={new URL('https://tealforge.com/')}
+          link={
+            new URL(
+              'https://romainlavoix.com/posts/how-i-created-a-search-engine-for-new-caledonia'
+            )
+          }
           subtitle={'CTO'}
           subtitle2={'2017-2019'}
         />
         <HomeLink
           title={'Octo Technology Aus'}
-          link={new URL('https://tealforge.com/')}
+          link={new URL('https://www.octo.com/en/')}
           subtitle={'Software Engineer'}
           subtitle2={'2016'}
         />
         <HomeLink
           title={'CAFAT'}
-          link={new URL('https://cafet.nc/')}
+          link={new URL('https://www.cafat.nc/')}
           subtitle={'Technical Architect'}
           subtitle2={'2015'}
         />

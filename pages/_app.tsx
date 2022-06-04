@@ -34,6 +34,10 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     }
   }, [router.events])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
