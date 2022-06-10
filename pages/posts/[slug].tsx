@@ -215,7 +215,11 @@ export async function getStaticProps({ params }) {
 // @ts-ignore
 Post.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout posts={page.props.posts ?? []} slug={page.props.slug ?? ''}>
+    <Layout
+      posts={page.props.posts ?? []}
+      slug={page.props.slug ?? ''}
+      fullscreen={false}
+    >
       {page}
     </Layout>
   )

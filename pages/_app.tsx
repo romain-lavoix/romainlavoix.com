@@ -20,6 +20,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter()
 
   useEffect(() => {
+    const main = document.getElementById('main')
+    if (main) {
+      main.scrollTo(0, 0)
+    }
+    window.scrollTo(0, 0)
     const handleRouteChange = (url: any) => {
       ga.pageview(url)
     }
@@ -33,10 +38,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.query])
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
   const getLayout = Component.getLayout ?? ((page) => page)
 

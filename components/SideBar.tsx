@@ -1,7 +1,7 @@
 import MenuLink from './MenuLink'
 import React, { useState, useEffect } from 'react'
 import { XIcon } from '@heroicons/react/solid'
-import { MenuIcon } from '@heroicons/react/outline'
+import { MenuIcon, DocumentTextIcon } from '@heroicons/react/outline'
 import BlogLink from './BlogLink'
 import { useRouter } from 'next/router'
 // @ts-ignore
@@ -68,6 +68,20 @@ function Navbar({
           setSelectedRoute={setSelectedRoute}
           setSidebarOpen={setSidebarOpen}
         />
+
+        <div className="flex items-center gap-4 pl-2 pt-4 pb-4">
+          <p className="text-sm font-medium text-gray-500 antialiased">
+            Resume
+          </p>
+        </div>
+        <MenuLink
+          title="Read"
+          icon="DocumentTextIcon"
+          route={'/resume'}
+          selectedRoute={selectedRoute}
+          setSelectedRoute={setSelectedRoute}
+          setSidebarOpen={setSidebarOpen}
+        />
         <div className="flex items-center gap-4 pl-2 pt-4 pb-4">
           <p className="text-sm font-medium text-gray-500 antialiased">
             Writing
@@ -115,7 +129,6 @@ export default function Sidebar({ posts }: SidebarProps) {
   const [selectedRoute, setSelectedRoute] = useState(router.asPath ?? '/')
   useEffect(() => {
     const main = document.getElementById('main')
-
     if (sidebarOpen && main) {
       main.classList.add('opacity-50')
     } else if (main) {

@@ -1,6 +1,7 @@
 import { HomeIcon, DesktopComputerIcon } from '@heroicons/react/solid'
 import {
   HomeIcon as HomeIconOutline,
+  DocumentTextIcon,
   DesktopComputerIcon as DesktopComputerIconOutline,
 } from '@heroicons/react/outline'
 import Link from 'next/link'
@@ -39,6 +40,15 @@ const MenuLink = ({
       case 'DesktopComputer':
         return (
           <DesktopComputerIcon
+            className={cls([
+              'w-4 text-white',
+              activated ? 'text-white' : 'text-black',
+            ])}
+          />
+        )
+      case 'DocumentTextIcon':
+        return (
+          <DocumentTextIcon
             className={cls([
               'w-4 text-white',
               activated ? 'text-white' : 'text-black',

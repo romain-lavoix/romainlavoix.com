@@ -8,6 +8,7 @@ import { ReactElement, ReactNode } from 'react'
 import { GraphQLClient, gql } from 'graphql-request'
 const rom_grey = require('../public/rom_grey.jpg')
 const map = require('../public/map.png')
+import Link from 'next/link'
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -62,13 +63,11 @@ const Home: NextPageWithLayout = () => {
               </a>{' '}
               in Paris, I built, maintained and supported a hugely complex risk
               analysis software at{' '}
-              <a
-                className=" no-underline hover:underline"
-                target="_blank"
-                href="https://www.calypso.com"
-              >
-                Calypso Technology
-              </a>
+              <Link href="/posts/my-experience-as-a-financial-software-engineer-in-san-francisco">
+                <a className=" no-underline hover:underline">
+                  Calypso Technology
+                </a>
+              </Link>
               , San Francisco. We had clients like Goldman Sachs, Morgan Stanly
               or Natixis.
             </p>
@@ -93,13 +92,9 @@ const Home: NextPageWithLayout = () => {
             </p>
             <p>
               Amongst other things, I released a local{' '}
-              <a
-                className=" no-underline hover:underline"
-                target="_blank"
-                href="https://www.moncoachwebmarketing.nc/2558-qwarx-nc-naissance-dun-moteur-de-recherche-caledonien"
-              >
-                search engine
-              </a>{' '}
+              <Link href="posts/how-i-created-a-search-engine-for-new-caledonia">
+                <a className=" no-underline hover:underline">search engine</a>
+              </Link>{' '}
               indexing 1M pages and hosting 30k visitors and 150k searchs a
               month, advised and invested in a ride hailing app, teached
               children robotics, released an{' '}
@@ -113,6 +108,13 @@ const Home: NextPageWithLayout = () => {
               , and was an associate at a local development firm specialized in
               start-ups, with a blockchain powered crowd-testing web app as a
               first released product.
+            </p>
+            <p>
+              You will find my resume{' '}
+              <Link href="resume">
+                <a className=" no-underline hover:underline">here</a>
+              </Link>
+              .
             </p>
           </article>
           <button
@@ -260,7 +262,11 @@ export async function getStaticProps() {
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout posts={page.props.posts}>{page}</Layout>
+  return (
+    <Layout posts={page.props.posts} fullscreen={false}>
+      {page}
+    </Layout>
+  )
 }
 
 export default Home
