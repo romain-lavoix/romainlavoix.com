@@ -21,7 +21,7 @@ export default function Layout({
           <main id="main">
             <div
               className={`relative h-full w-full ${
-                fullscreen ? '' : 'pb-16'
+                fullscreen ? '' : 'px-4 pb-16 lg:px-0'
               } lg:flex`}
             >
               <div

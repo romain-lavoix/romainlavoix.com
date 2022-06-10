@@ -92,7 +92,7 @@ const Home: NextPageWithLayout = () => {
             </p>
             <p>
               Amongst other things, I released a local{' '}
-              <Link href="posts/how-i-created-a-search-engine-for-new-caledonia">
+              <Link href="/posts/how-i-created-a-search-engine-for-new-caledonia">
                 <a className=" no-underline hover:underline">search engine</a>
               </Link>{' '}
               indexing 1M pages and hosting 30k visitors and 150k searchs a
@@ -111,7 +111,7 @@ const Home: NextPageWithLayout = () => {
             </p>
             <p>
               You will find my resume{' '}
-              <Link href="resume">
+              <Link href="/resume">
                 <a className=" no-underline hover:underline">here</a>
               </Link>
               .
