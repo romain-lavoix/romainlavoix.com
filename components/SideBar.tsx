@@ -1,11 +1,12 @@
 import MenuLink from './MenuLink'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { XIcon } from '@heroicons/react/solid'
-import { MenuIcon, DocumentTextIcon } from '@heroicons/react/outline'
+import { MenuIcon } from '@heroicons/react/outline'
 import BlogLink from './BlogLink'
 import { useRouter } from 'next/router'
 // @ts-ignore
 import OutsideClickHandler from 'react-outside-click-handler'
+import { globalContext } from '../store/store'
 
 type SidebarProps = {
   posts: any[]
@@ -14,24 +15,14 @@ type SidebarProps = {
 type NavbarProps = {
   posts: any[]
   mobile: boolean
-  sidebarOpen: any
-  setSidebarOpen: any
-  selectedRoute: any
-  setSelectedRoute: any
-  ref?: any
 }
 
-function Navbar({
-  posts,
-  mobile,
-  sidebarOpen,
-  setSidebarOpen,
-  selectedRoute,
-  setSelectedRoute,
-}: NavbarProps) {
+function Navbar({ posts, mobile }: NavbarProps) {
+  const { globalState, dispatch } = useContext(globalContext)
+
   let navBarClassName = ''
   if (mobile) {
-    if (sidebarOpen) {
+    if (globalState.isSideBarOpen) {
       navBarClassName =
         'font-lato absolute inset-y-0 z-10 h-full w-96 translate-x-0 flex-auto overflow-y-scroll absolute max-h-screen min-h-screen transform border-r-[1px] bg-gray-50 p-4 transition duration-200 ease-in lg:block'
     } else {
@@ -42,6 +33,7 @@ function Navbar({
     navBarClassName =
       'font-lato flex-auto overflow-y-auto absolute max-h-screen min-h-screen inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
   }
+
   return (
     <>
       <nav className={navBarClassName} aria-label="Sidebar">
@@ -49,7 +41,9 @@ function Navbar({
           {mobile ? (
             <XIcon
               className={'w-4 rounded hover:bg-gray-200 lg:hidden'}
-              onClick={() => setSidebarOpen(false)}
+              onClick={() => {
+                dispatch({ type: 'CLOSE_SIDEBAR' })
+              }}
             />
           ) : (
             <></>
@@ -60,28 +54,14 @@ function Navbar({
           </h1>
         </div>
 
-        <MenuLink
-          title="Home"
-          icon="Home"
-          route={'/'}
-          selectedRoute={selectedRoute}
-          setSelectedRoute={setSelectedRoute}
-          setSidebarOpen={setSidebarOpen}
-        />
+        <MenuLink title="Home" icon="Home" route={'/'} />
 
         <div className="flex items-center gap-4 pl-2 pt-4 pb-4">
           <p className="text-sm font-medium text-gray-500 antialiased">
             Resume
           </p>
         </div>
-        <MenuLink
-          title="Read"
-          icon="DocumentTextIcon"
-          route={'/resume'}
-          selectedRoute={selectedRoute}
-          setSelectedRoute={setSelectedRoute}
-          setSidebarOpen={setSidebarOpen}
-        />
+        <MenuLink title="Read" icon="DocumentTextIcon" route={'/resume'} />
         <div className="flex items-center gap-4 pl-2 pt-4 pb-4">
           <p className="text-sm font-medium text-gray-500 antialiased">
             Writing
@@ -98,9 +78,6 @@ function Navbar({
                 key={post.slug}
                 title={post.title}
                 route={`/posts/${post.slug}`}
-                selectedRoute={selectedRoute}
-                setSelectedRoute={setSelectedRoute}
-                setSidebarOpen={setSidebarOpen}
               />
             ))
         ) : (
@@ -112,7 +89,7 @@ function Navbar({
           <MenuIcon
             className=" h-10 w-10 rounded p-2 lg:hidden"
             onClick={() => {
-              setSidebarOpen(true)
+              dispatch({ type: 'OPEN_SIDEBAR' })
             }}
           />
         </div>
@@ -124,41 +101,28 @@ function Navbar({
 }
 
 export default function Sidebar({ posts }: SidebarProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const router = useRouter()
-  const [selectedRoute, setSelectedRoute] = useState(router.asPath ?? '/')
+  const { globalState, dispatch } = useContext(globalContext)
+
   useEffect(() => {
     const main = document.getElementById('main')
-    if (sidebarOpen && main) {
+    if (globalState.isSideBarOpen && main) {
       main.classList.add('opacity-50')
     } else if (main) {
       main.classList.remove('opacity-50')
     }
-  }, [sidebarOpen])
+  }, [globalState.isSideBarOpen])
 
   useEffect(() => {
-    setSidebarOpen(false)
-  }, [selectedRoute])
+    dispatch({ type: 'CLOSE_SIDEBAR' })
+  }, [globalState.selectedRoute])
 
   return (
     <>
-      <Navbar
-        posts={posts}
-        mobile={false}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        selectedRoute={selectedRoute}
-        setSelectedRoute={setSelectedRoute}
-      />
-      <OutsideClickHandler onOutsideClick={() => setSidebarOpen(false)}>
-        <Navbar
-          posts={posts}
-          mobile={true}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-          selectedRoute={selectedRoute}
-          setSelectedRoute={setSelectedRoute}
-        />
+      <Navbar posts={posts} mobile={false} />
+      <OutsideClickHandler
+        onOutsideClick={() => dispatch({ type: 'CLOSE_SIDEBAR' })}
+      >
+        <Navbar posts={posts} mobile={true} />
       </OutsideClickHandler>
     </>
   )

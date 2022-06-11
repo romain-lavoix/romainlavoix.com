@@ -1,30 +1,19 @@
 import { HomeIcon, DesktopComputerIcon } from '@heroicons/react/solid'
-import {
-  HomeIcon as HomeIconOutline,
-  DocumentTextIcon,
-  DesktopComputerIcon as DesktopComputerIconOutline,
-} from '@heroicons/react/outline'
+import { DocumentTextIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 
 type Props = {
   title: string
   icon: string
   route: string
-  selectedRoute: any
-  setSelectedRoute: any
-  setSidebarOpen: any
 }
-import cls from '../utils/cls'
+import cls from '../lib/cls'
+import { useContext } from 'react'
+import { globalContext } from '../store/store'
 
-const MenuLink = ({
-  title,
-  icon,
-  route = '/',
-  selectedRoute,
-  setSelectedRoute,
-  setSidebarOpen,
-}: Props) => {
-  const activated = route === selectedRoute
+const MenuLink = ({ title, icon, route = '/' }: Props) => {
+  const { globalState, dispatch } = useContext(globalContext)
+  const activated = route === globalState.selectedRoute
 
   function renderSwitch(icon: String, activated: boolean) {
     switch (icon) {
@@ -68,9 +57,9 @@ const MenuLink = ({
           activated ? 'bg-black' : 'hover:bg-gray-200',
         ])}
         onClick={() => {
-          setSelectedRoute(route)
+          dispatch({ type: 'SELECT_ROUTE', payload: route })
           if (activated) {
-            setSidebarOpen(false)
+            dispatch({ type: 'CLOSE_SIDEBAR' })
           }
         }}
       >

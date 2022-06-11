@@ -1,29 +1,17 @@
-import { HomeIcon, DesktopComputerIcon } from '@heroicons/react/solid'
-import {
-  HomeIcon as HomeIconOutline,
-  DesktopComputerIcon as DesktopComputerIconOutline,
-} from '@heroicons/react/outline'
+import { useContext } from 'react'
 import Link from 'next/link'
+import { globalContext } from '../store/store'
 
 type Props = {
   title: string
   route: string
   date: string
-  selectedRoute: any
-  setSelectedRoute: any
-  setSidebarOpen: any
 }
-import cls from '../utils/cls'
+import cls from '../lib/cls'
 
-const BlogLink = ({
-  title,
-  route = '/',
-  selectedRoute,
-  setSelectedRoute,
-  setSidebarOpen,
-  date,
-}: Props) => {
-  const activated = route === selectedRoute
+const BlogLink = ({ title, route = '/', date }: Props) => {
+  const { globalState, dispatch } = useContext(globalContext)
+  const activated = route === globalState.selectedRoute
 
   return (
     <Link href={route}>
@@ -33,9 +21,11 @@ const BlogLink = ({
           activated ? 'bg-black text-white' : 'text-gray-900 hover:bg-gray-200',
         ])}
         onClick={() => {
-          setSelectedRoute(route)
+          // setSelectedRoute(route)
+          dispatch({ type: 'SELECT_ROUTE', payload: route })
           if (activated) {
-            setSidebarOpen(false)
+            // setSidebarOpen(false)
+            dispatch({ type: 'OPEN_SIDEBAR' })
           }
         }}
       >
