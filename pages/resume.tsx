@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import Layout from '../components/Layout'
 import { gql, GraphQLClient } from 'graphql-request'
 
-export default function Resume() {
+const Resume = () => {
   return (
     <iframe
       src="resume.pdf#toolbar=1&view=Fit"
@@ -33,7 +33,6 @@ export async function getStaticProps() {
   }
 }
 
-// @ts-ignore
 Resume.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout posts={page.props.posts} fullscreen={true}>
@@ -41,3 +40,5 @@ Resume.getLayout = function getLayout(page: ReactElement) {
     </Layout>
   )
 }
+
+export default Resume

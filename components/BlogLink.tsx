@@ -12,7 +12,6 @@ import cls from '../lib/cls'
 const BlogLink = ({ title, route = '/', date }: Props) => {
   const { globalState, dispatch } = useContext(globalContext)
   const activated = route === globalState.selectedRoute
-
   return (
     <Link href={route}>
       <a
@@ -21,10 +20,7 @@ const BlogLink = ({ title, route = '/', date }: Props) => {
           activated ? 'bg-black text-white' : 'text-gray-900 hover:bg-gray-200',
         ])}
         onClick={() => {
-          // setSelectedRoute(route)
-          dispatch({ type: 'SELECT_ROUTE', payload: route })
           if (activated) {
-            // setSidebarOpen(false)
             dispatch({ type: 'OPEN_SIDEBAR' })
           }
         }}

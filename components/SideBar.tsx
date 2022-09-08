@@ -3,7 +3,6 @@ import React, { useEffect, useContext } from 'react'
 import { XIcon } from '@heroicons/react/solid'
 import { MenuIcon } from '@heroicons/react/outline'
 import BlogLink from './BlogLink'
-import { useRouter } from 'next/router'
 // @ts-ignore
 import OutsideClickHandler from 'react-outside-click-handler'
 import { globalContext } from '../store/store'

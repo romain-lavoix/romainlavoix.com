@@ -4,17 +4,22 @@ import Image from 'next/image'
 import HomeLink from '../components/HomeLink'
 import HomeLinkTitle from '../components/HomeLinkTitle'
 import Layout from '../components/Layout'
-import { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode, useContext } from 'react'
 import { GraphQLClient, gql } from 'graphql-request'
 const rom_grey = require('../public/rom_grey.jpg')
 const map = require('../public/map.png')
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { globalContext } from '../store/store'
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
 const Home: NextPageWithLayout = () => {
+  const { globalState, dispatch } = useContext(globalContext)
+  const router = useRouter()
+
   const title = 'Romain Lavoix'
   const description =
     'Full Stack Engineer and Product Owner turned Front-End Engineer'
@@ -93,7 +98,18 @@ const Home: NextPageWithLayout = () => {
             <p>
               Amongst other things, I released a local{' '}
               <Link href="/posts/how-i-created-a-search-engine-for-new-caledonia">
-                <a className=" no-underline hover:underline">search engine</a>
+                <a
+                  className=" no-underline hover:underline"
+                  onClick={(e) => {
+                    const route =
+                      '/posts/how-i-created-a-search-engine-for-new-caledonia'
+                    e.preventDefault()
+                    dispatch({ type: 'SELECT_ROUTE', payload: route })
+                    router.push(route)
+                  }}
+                >
+                  search engine
+                </a>
               </Link>{' '}
               indexing 1M pages and hosting 30k visitors and 150k searchs a
               month, advised and invested in a ride hailing app, teached

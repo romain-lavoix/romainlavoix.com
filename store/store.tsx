@@ -8,6 +8,7 @@ import React, {
 } from 'react'
 import Reducer from './reducer'
 import { ContextType, GlobalStateInterface } from './types'
+import { useRouter } from 'next/router'
 
 /**
  * React Context-based Global Store with a reducer

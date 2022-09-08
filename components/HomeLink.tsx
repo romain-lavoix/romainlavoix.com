@@ -7,10 +7,10 @@ type Props = {
   subtitle2?: String
 }
 
-const HomeLink = ({ title, subtitle, subtitle2 }: Props) => {
+const HomeLink = ({ title, subtitle, subtitle2, link }: Props) => {
   return (
     <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
-      <Link href="/">
+      <Link href={link}>
         <a
           target="_blank"
           className="group flex items-center gap-2 hover:text-blue-600 md:gap-4"
