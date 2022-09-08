@@ -3,8 +3,6 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://romainlavoix.com',
   generateRobotsTxt: true,
-  exclude: ['/server-sitemap.xml'],
-  robotsTxtOptions: {
-    additionalSitemaps: ['https://romainlavoix.com/server-sitemap.xml'],
-  },
+  // exclude: ['/server-sitemap.xml'],
+  generateIndexSitemap: false,
 }
