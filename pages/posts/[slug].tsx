@@ -67,7 +67,7 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
       post ? new Date(post.date) : new Date()
     ),
     dateModified: new Intl.DateTimeFormat('en-US').format(
-      post ? new Date(post.date) : new Date()
+      post ? new Date(post.updatedAt) : new Date()
     ),
   }
 
@@ -83,6 +83,7 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
         <meta property="og:url" content="romainlavoix.com" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
+        <meta property="og:updated_time" content={post.updatedAt} />
         <link rel="icon" href="/favicon.ico" />
         <script
           type="application/ld+json"
@@ -200,12 +201,14 @@ export async function getStaticProps({ params }) {
           date
           slug
           title
+          updatedAt
         }
         post(where: { slug: $slug }) {
           date
           slug
           title
           description
+          updatedAt
           blocks {
             ... on Content {
               id
