@@ -60,12 +60,14 @@ const Home: NextPageWithLayout = () => {
           <div className="relative float-left mr-2 h-[120px] w-[120px] rounded border">
             <Image
               src={rom_grey}
+              title="romain lavoix portrait"
               alt="picture of romain lavoix"
               layout="responsive"
               width={118}
               height={118}
               className="rounded"
               placeholder="blur"
+              priority={true}
             ></Image>
           </div>
           <article className="prose prose-slate text-justify font-merriweather prose-a:text-blue-600">
@@ -208,12 +210,15 @@ const Home: NextPageWithLayout = () => {
         <div className="col-span-12 items-center gap-4 lg:col-span-10 lg:col-start-2">
           <div className="relative mb-2 h-[300px] w-full">
             <Image
+              title="new caledonia map"
+              alt={'new caledonia map'}
               src={map}
               className="rounded-3xl"
               layout="responsive"
               width={652}
               height={300}
               placeholder="blur"
+              loading={'lazy'}
             />
           </div>
           <div className="grid justify-items-end">

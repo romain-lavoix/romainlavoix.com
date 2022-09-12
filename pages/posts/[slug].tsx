@@ -22,10 +22,10 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
-  // useEffect(
-  //   () => dispatch({ type: 'SELECT_ROUTE', payload: `/posts/${slug}` }),
-  //   [router]
-  // )
+  useEffect(
+    () => dispatch({ type: 'SELECT_ROUTE', payload: `/posts/${slug}` }),
+    [router]
+  )
 
   const shimmer = (w: number, h: number) => `
 <svg width="${w}" height="${h}"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

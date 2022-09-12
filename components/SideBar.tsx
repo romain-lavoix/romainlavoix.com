@@ -1,5 +1,5 @@
 import MenuLink from './MenuLink'
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { XIcon } from '@heroicons/react/solid'
 import { MenuIcon } from '@heroicons/react/outline'
 import BlogLink from './BlogLink'
@@ -30,7 +30,7 @@ function Navbar({ posts, mobile }: NavbarProps) {
     }
   } else {
     navBarClassName =
-      'font-lato flex-auto overflow-y-auto absolute max-h-screen min-h-screen inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block transition duration-200 ease-in-out lg:translate-x-0 -translate-x-full'
+      'font-lato flex-auto overflow-y-auto absolute max-h-screen min-h-screen inset-y-0 z-10 h-full w-96  border-r-[1px] bg-gray-50 p-4  lg:block'
   }
 
   return (
@@ -99,8 +99,33 @@ function Navbar({ posts, mobile }: NavbarProps) {
   )
 }
 
+function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+  })
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+      })
+    }
+    // Add event listener
+    window.addEventListener('resize', handleResize)
+    // Call handler right away so state gets updated with initial window size
+    handleResize()
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize)
+  }, []) // Empty array ensures that effect is only run on mount
+  return windowSize
+}
+
 export default function Sidebar({ posts }: SidebarProps) {
   const { globalState, dispatch } = useContext(globalContext)
+  const size = useWindowSize()
 
   useEffect(() => {
     const main = document.getElementById('main')
@@ -114,14 +139,13 @@ export default function Sidebar({ posts }: SidebarProps) {
   useEffect(() => {
     dispatch({ type: 'CLOSE_SIDEBAR' })
   }, [globalState.selectedRoute])
-
+  const mobile = size.width < 1024
   return (
     <>
-      <Navbar posts={posts} mobile={false} />
       <OutsideClickHandler
         onOutsideClick={() => dispatch({ type: 'CLOSE_SIDEBAR' })}
       >
-        <Navbar posts={posts} mobile={true} />
+        <Navbar posts={posts} mobile={mobile} />
       </OutsideClickHandler>
     </>
   )

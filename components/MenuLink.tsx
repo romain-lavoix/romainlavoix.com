@@ -20,28 +20,19 @@ const MenuLink = ({ title, icon, route = '/' }: Props) => {
       case 'Home':
         return (
           <HomeIcon
-            className={cls([
-              'w-4 text-white',
-              activated ? 'text-white' : 'text-black',
-            ])}
+            className={cls(['w-4', activated ? 'text-white' : 'text-black'])}
           />
         )
       case 'DesktopComputer':
         return (
           <DesktopComputerIcon
-            className={cls([
-              'w-4 text-white',
-              activated ? 'text-white' : 'text-black',
-            ])}
+            className={cls(['w-4', activated ? 'text-white' : 'text-black'])}
           />
         )
       case 'DocumentTextIcon':
         return (
           <DocumentTextIcon
-            className={cls([
-              'w-4 text-white',
-              activated ? 'text-white' : 'text-black',
-            ])}
+            className={cls(['w-4', activated ? 'text-white' : 'text-black'])}
           />
         )
       default:
