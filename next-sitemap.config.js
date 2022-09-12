@@ -1,8 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
-
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://romainlavoix.com',
+  siteUrl: 'https://romainlavoix.com',
   generateRobotsTxt: true,
-  // exclude: ['/server-sitemap.xml'],
   generateIndexSitemap: false,
 }

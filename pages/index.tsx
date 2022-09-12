@@ -22,6 +22,21 @@ const Home: NextPageWithLayout = () => {
 
   const title = 'Romain Lavoix - Software Engineer'
   const description = `I'm a Software Engineer with ten years of experience shipping web applications and enterprise systems. My current focus is Front-End Engineering.`
+  const schemaData = {
+    '@context': 'https://schema.org/',
+    '@type': 'Person',
+    name: 'Romain Lavoix',
+    url: 'https://romainlavoix.com',
+    image:
+      'https://romainlavoix.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2From_grey.fa0cdb6d.jpg&w=3840&q=75',
+    sameAs: [
+      'https://romainlavoix.com',
+      'https://www.linkedin.com/in/romain-lavoix/',
+      'https://github.com/romain-lavoix',
+    ],
+    jobTitle: 'Software Engineer',
+  }
+
   return (
     <>
       <Head>
@@ -35,6 +50,10 @@ const Home: NextPageWithLayout = () => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
       </Head>
       <div className="grid grid-cols-12 pt-12">
         <div className="col-span-12 col-start-1 lg:col-span-10 lg:col-start-2">
