@@ -49,7 +49,7 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
   const schemaData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.title,
+    headline: post ? post.title : '',
     image: 'https://romainlavoix.com/ogimage.png',
     author: {
       '@type': 'Person',
@@ -63,8 +63,12 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
         url: 'https://romainlavoix.com/ogimage.png',
       },
     },
-    datePublished: new Intl.DateTimeFormat('en-US').format(new Date(post.date)),
-    dateModified: new Intl.DateTimeFormat('en-US').format(new Date(post.date)),
+    datePublished: new Intl.DateTimeFormat('en-US').format(
+      post ? new Date(post.date) : new Date()
+    ),
+    dateModified: new Intl.DateTimeFormat('en-US').format(
+      post ? new Date(post.date) : new Date()
+    ),
   }
 
   return post ? (
