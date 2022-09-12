@@ -46,6 +46,27 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
       ? Buffer.from(str).toString('base64')
       : window.btoa(str)
 
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    image: 'https://romainlavoix.com/ogimage.png',
+    author: {
+      '@type': 'Person',
+      name: 'Romain Lavoix',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'romainlavoix.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://romainlavoix.com/ogimage.png',
+      },
+    },
+    datePublished: new Intl.DateTimeFormat('en-US').format(new Date(post.date)),
+    dateModified: new Intl.DateTimeFormat('en-US').format(new Date(post.date)),
+  }
+
   return post ? (
     <>
       <Head>
@@ -59,6 +80,10 @@ const Post: ({ post, slug }: PostParams) => JSX.Element = ({
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
       </Head>
       <div className="grid grid-cols-12 pb-16">
         <div className="col-span-12 col-start-1  lg:col-span-10 lg:col-start-2">
