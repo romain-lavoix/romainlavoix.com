@@ -20,10 +20,8 @@ const Home: NextPageWithLayout = () => {
   const { globalState, dispatch } = useContext(globalContext)
   const router = useRouter()
 
-  const title = 'Romain Lavoix'
-  const description =
-    'Full Stack Engineer and Product Owner turned Front-End Engineer'
-
+  const title = 'Romain Lavoix - Software Engineer'
+  const description = `I'm a Software Engineer with ten years of experience shipping web applications and enterprise systems. My current focus is Front-End Engineering.`
   return (
     <>
       <Head>
