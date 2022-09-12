@@ -40,10 +40,9 @@ const Home: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Romain Lavoix</title>
+        <title>{title}</title>
         <link rel="canonical" href="https://romainlavoix.com" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" content={title} key="title" />
         <meta name="description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="romainlavoix.com" />
