@@ -145,9 +145,9 @@ const Home: NextPageWithLayout = () => {
               first released product.
             </p>
             <p>
-              You will find my resume{' '}
+              Here is my{' '}
               <Link href="/resume">
-                <a className=" no-underline hover:underline">here</a>
+                <a className=" no-underline hover:underline">resume</a>
               </Link>
               .
             </p>
