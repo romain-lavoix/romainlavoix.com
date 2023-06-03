@@ -21,8 +21,8 @@ const Home: NextPageWithLayout = () => {
   const router = useRouter()
 
   const title =
-    'Romain Lavoix - Software Engineer - Web Applications Specialist'
-  const description = `I'm a Software Engineer with ten years of experience shipping web applications and enterprise systems. My current focus is Front-End Engineering.`
+    'Romain Lavoix - Senior Software Engineer - Web Applications Specialist'
+  const description = `I'm a Software Engineer with ten years of experience shipping web applications and enterprise systems.`
   const schemaData = {
     '@context': 'https://schema.org/',
     '@type': 'Person',
@@ -35,7 +35,7 @@ const Home: NextPageWithLayout = () => {
       'https://www.linkedin.com/in/romain-lavoix/',
       'https://github.com/romain-lavoix',
     ],
-    jobTitle: 'Software Engineer',
+    jobTitle: 'Senior Software Engineer',
   }
 
   return (
@@ -72,9 +72,9 @@ const Home: NextPageWithLayout = () => {
           </div>
           <article className="prose prose-slate text-justify font-merriweather prose-a:text-blue-600">
             <p>
-              Hi, I'm Romain. I'm a software engineer and product owner,
-              experienced in working across the whole stack, and in shipping web
-              applications as well as enterprise softwares.
+              Hi, I'm Romain. I'm a senior software engineer, experienced in
+              working across the whole stack, and in shipping web applications
+              as well as enterprise softwares.
             </p>
             <p>
               After graduating from{' '}
@@ -145,6 +145,20 @@ const Home: NextPageWithLayout = () => {
               first released product.
             </p>
             <p>
+              After a 2 years long career break, where I took the opportunity to
+              launch a side business with my fiancée, I am now happily employed
+              as a Senior Software Engineer with{' '}
+              <a
+                className=" no-underline hover:underline"
+                target="_blank"
+                href="https://agilesoft.nc"
+              >
+                AgileSoft.NC
+              </a>
+              , currently working as a contractor for the New Caledonian
+              government.
+            </p>
+            <p>
               Here is my{' '}
               <Link href="/resume">
                 <a className=" no-underline hover:underline">resume</a>
@@ -164,6 +178,12 @@ const Home: NextPageWithLayout = () => {
       </div>
       <div className="grid grid-cols-12 gap-4 pb-16 font-lato">
         <HomeLinkTitle title={'Work'} />
+        <HomeLink
+          title={'AgileSoft.NC'}
+          link={new URL('https://www.agilesoft.nc/')}
+          subtitle={'Senior Software Engineer'}
+          subtitle2={'2023'}
+        />
         <HomeLink
           title={'TealForge'}
           link={new URL('https://tealforge.com/')}
@@ -261,7 +281,7 @@ const Home: NextPageWithLayout = () => {
           subtitle={'View'}
         />
         <HomeLink
-          title={'Overflow'}
+          title={'Stack Overflow'}
           link={
             new URL('https://stackoverflow.com/users/2617419/romain-lavoix')
           }
